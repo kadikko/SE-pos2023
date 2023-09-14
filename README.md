@@ -1,4 +1,4 @@
-# Team <write your team name here>:
+# Team LG10:
 1. Kaarel Tamuri
 2. Kadi Koppelmann
 3. Karl Tomasson
