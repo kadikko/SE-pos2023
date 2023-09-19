@@ -5,7 +5,7 @@
 4. Kelli Gagarina
 
 ## Homework 1:
-<When you finish your homework, add a link pointing to the solution here (for example, a link to a page on the wiki)> 
+https://bitbucket.org/lg100/lg10-lg10/wiki/Homework1 
 
 ## Homework 2:
 <Links to the solution>
