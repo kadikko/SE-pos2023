@@ -8,7 +8,7 @@
 https://bitbucket.org/lg100/lg10-lg10/wiki/Homework1 
 
 ## Homework 2:
-https://docs.google.com/document/d/1j0i8QTCYFeNilgslR6UFYz4c2pgQPz4SlLELKAmD-Ss/edit?usp=sharing
+https://bitbucket.org/lg100/lg10-lg10/wiki/Homework2
 
 ## Homework 3:
 <Links to the solution>
