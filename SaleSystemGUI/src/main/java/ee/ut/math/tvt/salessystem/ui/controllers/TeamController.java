@@ -32,10 +32,10 @@ public class TeamController implements Initializable {
     private Properties loeProperties(String path) throws IOException {
         Properties pros = new Properties();
         File file = new File(path);
-        String pathh = file.getAbsolutePath();
-        String[] pathid = pathh.split("lg10-lg10");
-        pathh = pathid[0] + "lg10-lg10\\src\\main\\resources\\application.properties";
-        FileInputStream ip = new FileInputStream(pathh);
+        String absPath = file.getAbsolutePath();
+        String[] pathid = absPath.split("lg10-lg10");
+        absPath = pathid[0] + "lg10-lg10\\src\\main\\resources\\application.properties";
+        FileInputStream ip = new FileInputStream(absPath);
         pros.load(ip);
         return pros;
     }
