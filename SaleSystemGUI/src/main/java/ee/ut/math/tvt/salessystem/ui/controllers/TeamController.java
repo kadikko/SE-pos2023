@@ -40,7 +40,7 @@ public class TeamController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            Properties pros = loeProperties("application.properties"); //siin tuleb enda arvutis olev application.properties path panna , muidu ei toimi
+            Properties pros = loeProperties("application.properties");
             String tName = pros.getProperty("teamName");
             String tLogo = pros.getProperty("teamLogo");
             String tMembers = pros.getProperty("teamMembers");
