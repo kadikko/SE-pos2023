@@ -87,13 +87,18 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    private void showTeam() {
-        Properties properties = new Properties();
-        try (FileInputStream input = new FileInputStream("src/main/resources/application.properties")) {
-            properties.load(input);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Properties loeProperties(String path) throws IOException {
+        Properties pros = new Properties();
+        File file = new File(path);
+        String absPath = file.getAbsolutePath();
+        String[] pathid = absPath.split("lg10-lg10");
+        absPath = pathid[0] + "lg10-lg10"+File.separator+"src"+File.separator+"main"+File.separator+"resources"+File.separator+"application.properties";
+        FileInputStream ip = new FileInputStream(absPath);
+        pros.load(ip);
+        return pros;
+    }
+    private void showTeam() throws IOException {
+        Properties properties = loeProperties("application.properties");
 
         System.out.println("-------------------------");
         System.out.println("Team name: " + properties.getProperty("teamName"));
@@ -102,7 +107,7 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
-    private void processCommand(String command) {
+    private void processCommand(String command) throws IOException {
         String[] c = command.split(" ");
 
         if (c[0].equals("h"))
