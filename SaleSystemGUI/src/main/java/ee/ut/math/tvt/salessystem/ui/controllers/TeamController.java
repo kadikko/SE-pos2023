@@ -2,6 +2,8 @@ package ee.ut.math.tvt.salessystem.ui.controllers;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.io.*;
@@ -22,7 +24,7 @@ public class TeamController implements Initializable {
     private Text teamMembers;
 
     @FXML
-    private Text teamLogo;
+    private ImageView teamLogo;
 
     public TeamController(SalesSystemDAO dao) {
         this.dao = dao;
@@ -30,10 +32,10 @@ public class TeamController implements Initializable {
     private Properties loeProperties(String path) throws IOException {
         Properties pros = new Properties();
         File file = new File(path);
-        String pathh = file.getAbsolutePath();
-        String[] pathid = pathh.split("lg10-lg10");
-        pathh = pathid[0] + "lg10-lg10\\src\\main\\resources\\application.properties";
-        FileInputStream ip = new FileInputStream(pathh);
+        String absPath = file.getAbsolutePath();
+        String[] pathid = absPath.split("lg10-lg10");
+        absPath = pathid[0] + "lg10-lg10\\src\\main\\resources\\application.properties";
+        FileInputStream ip = new FileInputStream(absPath);
         pros.load(ip);
         return pros;
     }
@@ -48,7 +50,7 @@ public class TeamController implements Initializable {
             teamName.setText(tName);
             teamMembers.setText(tMembers);
             teamContactPerson.setText(tCP);
-            teamLogo.setText(tLogo);
+            teamLogo.setImage(new Image(tLogo));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
