@@ -9,11 +9,10 @@ import ee.ut.math.tvt.salessystem.logic.ShoppingCart;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 /**
  * A simple CLI (limited functionality).
@@ -84,7 +83,22 @@ public class ConsoleUI {
         System.out.println("p\t\tPurchase the shopping cart");
         System.out.println("r\t\tReset the shopping cart");
         System.out.println("rw\t\tRefresh warehouse");
-        System.out.println("t\t\tShow Team view");
+        System.out.println("t\t\tShow team view");
+        System.out.println("-------------------------");
+    }
+
+    private void showTeam() {
+        Properties properties = new Properties();
+        try (FileInputStream input = new FileInputStream("src/main/resources/application.properties")) {
+            properties.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("-------------------------");
+        System.out.println("Team name: " + properties.getProperty("teamName"));
+        System.out.println("Team contact person: " + properties.getProperty("teamContactPerson"));
+        System.out.println("Team members: " + properties.getProperty("teamMembers"));
         System.out.println("-------------------------");
     }
 
@@ -99,6 +113,8 @@ public class ConsoleUI {
             showStock();
         else if (c[0].equals("c"))
             showCart();
+        else if (c[0].equals("t"))
+            showTeam();
         else if (c[0].equals("p"))
             cart.submitCurrentPurchase();
         else if (c[0].equals("r"))
