@@ -6,7 +6,11 @@
 	 control_color: #5FA292;
 	 title_color: #253939;
 	 -fx-background-color: linear-gradient(from 25% 100% to 100% 25%, b_color, main_text_color);
+
 }
+
+
+
 
 
  
@@ -33,12 +37,20 @@
 } 
 
 .background_style{
-	 /*-fx-background-color: b_color;*/
-	  -fx-background-color: linear-gradient(from 25% 100% to 100% 25%, b_color, main_text_color);
+    -fx-background-color: b_color;
+    /*-fx-background-color: linear-gradient(from 25% 100% to 100% 25%, b_color, main_text_color);*/
 }
 
 .background_fills{
 	-fx-background-color: #000000, #111111, #000000, #111111;
+}
+
+.blue_style{
+    -fx-background-color: sb_color;
+    -fx-text-fill: main_text_color;
+    -fx-padding: 20px;
+
+
 }
 
 .label{
@@ -242,7 +254,7 @@
  
     -fx-background-color: control_color;
    
-     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: main_text_color;
  

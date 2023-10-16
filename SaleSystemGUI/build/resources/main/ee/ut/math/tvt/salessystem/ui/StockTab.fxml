@@ -6,10 +6,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
-<TitledPane alignment="CENTER" animated="false" collapsible="false" text="Warehouse status" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
-  <BorderPane>
+<TitledPane  alignment="CENTER" animated="false" collapsible="false" text="Warehouse status" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1">
+  <BorderPane styleClass="background_style">
     <center>
-      <TableView fx:id="warehouseTableView" styleClass="blue_style" BorderPane.alignment="CENTER">
+      <TableView fx:id="warehouseTableView" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn text="Id">
             <cellValueFactory>
