@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Team info" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane  animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Team info" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
   <content>
-    <AnchorPane styleClass="blue_style" minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="598.0">
+    <AnchorPane  styleClass="blue_style" minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="598.0">
          <children>
             <Text layoutX="22.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Name" wrappingWidth="150.13671875" />
             <Text fx:id="teamName" layoutX="172.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="210.13671875" />

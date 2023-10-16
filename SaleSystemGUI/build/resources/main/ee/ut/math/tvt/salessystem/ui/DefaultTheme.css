@@ -12,7 +12,9 @@
 
 
 
-
+Text {
+    -fx-fill: main_text_color;
+}
  
 .background{
     -fx-background-color: b_color;
@@ -47,8 +49,8 @@
 
 .blue_style{
     -fx-background-color: sb_color;
-    -fx-text-fill: main_text_color;
-    -fx-padding: 20px;
+    -fx-text-fill: red;
+
 
 
 }
@@ -236,7 +238,12 @@
 .titled-pane:focused > .title 
 {
 -fx-color: -fx-focus-color;
-} 
+}
+
+
+#teamName{
+    -fx-text-fill: main_text_color;
+}
  
 /*******************************************************************************
  *                                                                             *
