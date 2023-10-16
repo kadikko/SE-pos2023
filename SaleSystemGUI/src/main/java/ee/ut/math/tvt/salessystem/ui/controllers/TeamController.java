@@ -4,13 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
-import javax.swing.text.html.ImageView;
-import java.awt.*;
-import java.io.File;
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
@@ -29,7 +24,7 @@ public class TeamController implements Initializable {
     @FXML
     private Text teamLogo;
 
-    public TeamController(SalesSystemDAO dao) throws IOException {
+    public TeamController(SalesSystemDAO dao) {
         this.dao = dao;
     }
     private Properties loeProperties(String path) throws IOException {
