@@ -29,17 +29,18 @@ public class TeamController implements Initializable {
     }
     private Properties loeProperties(String path) throws IOException {
         Properties pros = new Properties();
-        //File file = new File(path);
-        //String pathh = file.getAbsolutePath();
-        FileInputStream ip = new FileInputStream(path);
+        File file = new File(path);
+        String pathh = file.getAbsolutePath();
+        String[] pathid = pathh.split("lg10-lg10");
+        pathh = pathid[0] + "lg10-lg10\\src\\main\\resources\\application.properties";
+        FileInputStream ip = new FileInputStream(pathh);
         pros.load(ip);
         return pros;
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        teamName.setText("not hah");
         try {
-            Properties pros = loeProperties("src/main/resources/application.properties"); //siin tuleb enda arvutis olev application.properties path panna , muidu ei toimi
+            Properties pros = loeProperties("application.properties");
             String tName = pros.getProperty("teamName");
             String tLogo = pros.getProperty("teamLogo");
             String tMembers = pros.getProperty("teamMembers");
