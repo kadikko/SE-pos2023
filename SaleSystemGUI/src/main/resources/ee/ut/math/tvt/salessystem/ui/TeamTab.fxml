@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<TitledPane animated="false" collapsible="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Team info" textAlignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="95.0" prefWidth="598.0">
+         <children>
+            <Text layoutX="22.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Name" wrappingWidth="150.13671875" />
+            <Text fx:id="teamName" layoutX="172.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="hah" wrappingWidth="210.13671875" />
+            <Text layoutX="22.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Contact Person" wrappingWidth="150.13671875" />
+            <Text fx:id="teamContactPerson" layoutX="172.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="229.13671875" />
+            <Text layoutX="22.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Logo" wrappingWidth="150.13671875" />
+            <Text fx:id="teamMembers" layoutX="172.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="400.13671875" />
+            <Text layoutX="22.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Team Members" wrappingWidth="150.13671875" />
+            <Text fx:id="teamLogo" layoutX="173.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="226.13671875" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="172.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </AnchorPane>
+  </content>
+</TitledPane>
