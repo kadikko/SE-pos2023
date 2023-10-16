@@ -34,7 +34,7 @@ public class TeamController implements Initializable {
         File file = new File(path);
         String absPath = file.getAbsolutePath();
         String[] pathid = absPath.split("lg10-lg10");
-        absPath = pathid[0] + "lg10-lg10\\src\\main\\resources\\application.properties";
+        absPath = pathid[0] + "lg10-lg10"+File.separator+"src"+File.separator+"main"+File.separator+"resources"+File.separator+"application.properties";
         FileInputStream ip = new FileInputStream(absPath);
         pros.load(ip);
         return pros;
