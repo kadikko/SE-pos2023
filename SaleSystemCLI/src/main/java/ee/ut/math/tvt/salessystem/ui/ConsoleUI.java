@@ -8,6 +8,7 @@ import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import ee.ut.math.tvt.salessystem.logic.ShoppingCart;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.util.JsonUtils;
 
 import java.io.*;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ConsoleUI {
         for (StockItem si : stockItems) {
             System.out.println(si.getId() + " " + si.getName() + " " + si.getPrice() + "Euro (" + si.getQuantity() + " items)");
         }
-        if (stockItems.size() == 0) {
+        if (stockItems.isEmpty()) {
             System.out.println("\tNothing");
         }
         System.out.println("-------------------------");
@@ -67,7 +68,7 @@ public class ConsoleUI {
         for (SoldItem si : cart.getAll()) {
             System.out.println(si.getName() + " " + si.getPrice() + "Euro (" + si.getQuantity() + " items)");
         }
-        if (cart.getAll().size() == 0) {
+        if (cart.getAll().isEmpty()) {
             System.out.println("\tNothing");
         }
         System.out.println("-------------------------");
@@ -80,9 +81,10 @@ public class ConsoleUI {
         System.out.println("w\t\tShow warehouse contents");
         System.out.println("c\t\tShow cart contents");
         System.out.println("a IDX NR \tAdd NR of stock item with index IDX to the cart");
+        System.out.println("aw\t\tAdd a stock item to the warehouse");
+        System.out.println("rw\t\tRefresh warehouse");
         System.out.println("p\t\tPurchase the shopping cart");
         System.out.println("r\t\tReset the shopping cart");
-        System.out.println("rw\t\tRefresh warehouse");
         System.out.println("t\t\tShow team view");
         System.out.println("-------------------------");
     }
@@ -107,6 +109,51 @@ public class ConsoleUI {
         System.out.println("-------------------------");
     }
 
+    private void addWarehouseHelp() {
+        System.out.println("-------------------------");
+        System.out.println("Usage:\n");
+        System.out.println("ae IDX NR\n\n- Adds an already existing item to the warehouse (essentialy changing the quantity)\n(example: 'ae 5 5')\n");
+        System.out.println("an NR NAME PRC\n\n- Add a new item to the warehouse with it's details (split the name with undercases)\n(example: 'an 5 Vodka 9.99', 'an 8 Frosted_Flakes 2.99'");
+        System.out.println("-------------------------");
+
+    }
+    private void addWarehouse() throws IOException {
+        addWarehouseHelp();
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String[] cmd = in.readLine().trim().split(" ");
+        if (cmd[0].equalsIgnoreCase("q")) System.exit(0);
+        else if (cmd[0].equalsIgnoreCase("ae") && cmd.length==3) {
+            try {
+                long idx = Long.parseLong(cmd[1]);
+                int amount = Integer.parseInt(cmd[2]);
+                StockItem item = dao.findStockItem(idx);
+                if (item != null) {
+                    item.setQuantity(item.getQuantity()+amount);
+                } else {
+                    System.out.println("no stock item with id " + idx);
+                }
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+        else if (cmd[0].equalsIgnoreCase("an") && cmd.length == 4) {
+            try {
+                long idx = dao.findStockItems().size() + 1;
+                int amount = Integer.parseInt(cmd[1]);
+                String[] names = cmd[2].split("_");
+                StringBuilder name = new StringBuilder();
+                for (int i = 0; i < names.length; i++) {
+                    if (i == names.length - 1) name.append(names[i]);
+                    else name.append(names[i]).append(" ");
+                }
+                double price = Double.parseDouble(cmd[3]);
+                dao.saveStockItem(new StockItem(idx, name.toString(), "", price, amount));
+            } catch (SalesSystemException | NoSuchElementException e) {
+                log.error(e.getMessage(), e);
+            }
+        } else System.out.println("unknown command");
+        printUsage();
+    }
     private void processCommand(String command) throws IOException {
         String[] c = command.split(" ");
 
@@ -137,7 +184,15 @@ public class ConsoleUI {
             } catch (SalesSystemException | NoSuchElementException e) {
                 log.error(e.getMessage(), e);
             }
-        } else {
+        }
+        else if (c[0].equals(("aw"))) {
+            addWarehouse();
+        }
+        else if (c[0].equals(("rw"))) {
+            System.out.println("Updating warehouse...");
+            showStock();
+        }
+        else {
             System.out.println("unknown command");
         }
     }
