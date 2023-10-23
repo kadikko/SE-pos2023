@@ -2,9 +2,11 @@ package ee.ut.math.tvt.salessystem.logic;
 
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
+import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ShoppingCart {
 
@@ -20,9 +22,23 @@ public class ShoppingCart {
      */
     public void addItem(SoldItem item) {
         // TODO In case such stockItem already exists increase the quantity of the existing stock
-        // TODO verify that warehouse items' quantity remains at least zero or throw an exception
+        int quantityToBePurchased = item.getQuantity();
 
-        items.add(item);
+        for (SoldItem itemInCart:
+             items) {
+            if (Objects.equals(itemInCart.getName(), item.getName())){
+                quantityToBePurchased += itemInCart.getQuantity();
+            }
+        }
+
+        // TODO verify that warehouse items' quantity remains at least zero or throw an exception
+        int quantityInWarehouse = dao.findStockItem(item.getStockItem().getId()).getQuantity();
+        if (quantityToBePurchased <= quantityInWarehouse){
+            items.add(item);
+        } else {
+            System.out.println("Not enough stock in warehouse");
+        }
+
         //log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
 
@@ -36,6 +52,13 @@ public class ShoppingCart {
 
     public void submitCurrentPurchase() {
         // TODO decrease quantities of the warehouse stock
+        for (SoldItem item: items) {
+            StockItem stockItem = dao.findStockItem(item.getStockItem().getId());
+            int previousQuantity = stockItem.getQuantity();
+            int updatedQuantity = previousQuantity - item.getQuantity();
+            stockItem.setQuantity(updatedQuantity);
+        }
+
 
         // note the use of transactions. InMemorySalesSystemDAO ignores transactions
         // but when you start using hibernate in lab5, then it will become relevant.
