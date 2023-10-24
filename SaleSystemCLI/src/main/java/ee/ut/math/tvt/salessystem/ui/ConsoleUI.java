@@ -189,7 +189,7 @@ public class ConsoleUI {
             addWarehouse();
         }
         else if (c[0].equals(("rw"))) {
-            System.out.println("Updating warehouse...");
+            System.out.println("Updating warehouse....");
             showStock();
         }
         else {
