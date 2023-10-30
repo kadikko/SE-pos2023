@@ -28,7 +28,7 @@ import java.net.URL;
  */
 public class SalesSystemUI extends Application {
 
-    private static final Logger log = LogManager.getLogger(SalesSystemUI.class);
+    private static final Logger log = LogManager.getLogger("SalesSystemUI");
 
     private final SalesSystemDAO dao;
     private final ShoppingCart shoppingCart;
@@ -46,21 +46,25 @@ public class SalesSystemUI extends Application {
         purchaseTab.setText("Point-of-sale");
         purchaseTab.setClosable(false);
         purchaseTab.setContent(loadControls("PurchaseTab.fxml", new PurchaseController(dao, shoppingCart)));
+        log.info("Purchase tab initialized");
 
         Tab stockTab = new Tab();
         stockTab.setText("Warehouse");
         stockTab.setClosable(false);
         stockTab.setContent(loadControls("StockTab.fxml", new StockController(dao)));
+        log.info("Warehouse tab initialized");
 
         Tab historyTab = new Tab();
         historyTab.setText("History");
         historyTab.setClosable(false);
         //historyTab.setContent(loadControls("HistoryTab.fxml", new HistoryController()));
+        //log.info("History tab initialized");
 
         Tab teamTab = new Tab();
         teamTab.setText("Team");
         teamTab.setClosable(false);
         teamTab.setContent(loadControls("TeamTab.fxml", new TeamController(dao)));
+        log.info("Team tab initialized");
 
         Group root = new Group();
         Scene scene = new Scene(root, 600, 500, Color.WHITE);
@@ -81,9 +85,10 @@ public class SalesSystemUI extends Application {
 
     private Node loadControls(String fxml, Initializable controller) throws IOException {
         URL resource = getClass().getResource(fxml);
-        if (resource == null)
+        if (resource == null) {
+            log.info("Something broken, dont know what");
             throw new IllegalArgumentException(fxml + " not found");
-
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(resource);
         fxmlLoader.setController(controller);
         return fxmlLoader.load();

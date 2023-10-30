@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
  */
 public class PurchaseController implements Initializable {
 
-    private static final Logger log = LogManager.getLogger(PurchaseController.class);
+    private static final Logger log = LogManager.getLogger("PurchaseController");
 
     private final SalesSystemDAO dao;
     private final ShoppingCart shoppingCart;
@@ -70,6 +70,7 @@ public class PurchaseController implements Initializable {
                 }
             }
         });
+        log.info("Purchase info acquired");
     }
 
     /** Event handler for the <code>new purchase</code> event. */
@@ -79,7 +80,7 @@ public class PurchaseController implements Initializable {
         try {
             enableInputs();
         } catch (SalesSystemException e) {
-            log.error(e.getMessage(), e);
+            log.error(e.getMessage());
         }
     }
 
@@ -94,7 +95,7 @@ public class PurchaseController implements Initializable {
             disableInputs();
             purchaseTableView.refresh();
         } catch (SalesSystemException e) {
-            log.error(e.getMessage(), e);
+            log.error(e.getMessage());
         }
     }
 
@@ -110,7 +111,7 @@ public class PurchaseController implements Initializable {
             disableInputs();
             purchaseTableView.refresh();
         } catch (SalesSystemException e) {
-            log.error(e.getMessage(), e);
+            log.error(e.getMessage());
         }
     }
 
@@ -149,6 +150,7 @@ public class PurchaseController implements Initializable {
             long code = Long.parseLong(barCodeField.getText());
             return dao.findStockItem(code);
         } catch (NumberFormatException e) {
+            log.error(e.getMessage());
             return null;
         }
     }
