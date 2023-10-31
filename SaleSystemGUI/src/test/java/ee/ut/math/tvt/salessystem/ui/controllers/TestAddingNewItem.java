@@ -30,6 +30,6 @@ public class TestAddingNewItem {
 
         // updated number of stock items in dao
         int updatedStockSize = dao.findStockItems().size();
-        assertEquals(updatedStockSize, initialStockSize + 2);
+        assertEquals(updatedStockSize, initialStockSize + 1);
     }
 }
