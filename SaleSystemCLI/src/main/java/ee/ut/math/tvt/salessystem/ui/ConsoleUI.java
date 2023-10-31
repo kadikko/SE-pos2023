@@ -19,7 +19,7 @@ import java.util.Properties;
  * A simple CLI (limited functionality).
  */
 public class ConsoleUI {
-    private static final Logger log = LogManager.getLogger(ConsoleUI.class);
+    private static final Logger log = LogManager.getLogger("ConsoleUI");
 
     private final SalesSystemDAO dao;
     private final ShoppingCart cart;
@@ -39,6 +39,7 @@ public class ConsoleUI {
      * Run the sales system CLI.
      */
     public void run() throws IOException {
+        log.info("CLI initialized");
         System.out.println("===========================");
         System.out.println("=       Sales System      =");
         System.out.println("===========================");
@@ -128,12 +129,14 @@ public class ConsoleUI {
                 int amount = Integer.parseInt(cmd[2]);
                 StockItem item = dao.findStockItem(idx);
                 if (item != null) {
+                    log.info("Updating existing item");
                     item.setQuantity(item.getQuantity()+amount);
                 } else {
-                    System.out.println("no stock item with id " + idx);
+                    log.error("no stock item with id " + idx);
+                    log.debug("Updating existing item failed");
                 }
             } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
+                log.error(e.getMessage());
             }
         }
         else if (cmd[0].equalsIgnoreCase("an") && cmd.length == 4) {
@@ -147,53 +150,69 @@ public class ConsoleUI {
                     else name.append(names[i]).append(" ");
                 }
                 double price = Double.parseDouble(cmd[3]);
+                log.info("Adding new item to warehouse");
                 dao.saveStockItem(new StockItem(idx, name.toString(), "", price, amount));
-            } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
+            } catch (NumberFormatException e) {
+                log.error(e.getMessage());
             }
-        } else System.out.println("unknown command");
+        } else log.info("Unknown command");
         printUsage();
     }
     private void processCommand(String command) throws IOException {
         String[] c = command.split(" ");
 
-        if (c[0].equals("h"))
+        if (c[0].equals("h")) {
+            log.debug("Help requested");
             printUsage();
-        else if (c[0].equals("q"))
+        }
+        else if (c[0].equals("q")) {
+            log.info("Bye!");
             System.exit(0);
-        else if (c[0].equals("w"))
+        }
+        else if (c[0].equals("w")) {
+            log.debug("Warehouse contents displayed");
             showStock();
-        else if (c[0].equals("c"))
+        }
+        else if (c[0].equals("c")) {
+            log.debug("Cart contents displayed");
             showCart();
-        else if (c[0].equals("t"))
+        }
+        else if (c[0].equals("t")) {
+            log.debug("Team info displayed");
             showTeam();
-        else if (c[0].equals("p"))
+        }
+        else if (c[0].equals("p")) {
+            log.info("Purchase submitted");
             cart.submitCurrentPurchase();
-        else if (c[0].equals("r"))
+        }
+        else if (c[0].equals("r")) {
+            log.info("Purchase cancelled");
             cart.cancelCurrentPurchase();
+        }
         else if (c[0].equals("a") && c.length == 3) {
             try {
-                long idx = Long.parseLong(c[1]);
                 int amount = Integer.parseInt(c[2]);
+                long idx = Long.parseLong(c[1]);
                 StockItem item = dao.findStockItem(idx);
                 if (item != null) {
+                    log.info("New item added to cart");
                     cart.addItem(new SoldItem(item, Math.min(amount, item.getQuantity())));
                 } else {
-                    System.out.println("no stock item with id " + idx);
+                    log.error("no stock item with id " + idx);
                 }
-            } catch (SalesSystemException | NoSuchElementException e) {
-                log.error(e.getMessage(), e);
+            } catch (NumberFormatException e) {
+                log.error(e.getMessage());
             }
         }
         else if (c[0].equals(("aw"))) {
             addWarehouse();
         }
         else if (c[0].equals(("rw"))) {
-            System.out.println("Updating warehouse....");
+            log.debug("Warehouse updated");
             showStock();
         }
         else {
-            System.out.println("unknown command");
+            log.info("Unknown command");
         }
     }
 

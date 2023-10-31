@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+
+    <SplitPane dividerPositions="0.4" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+            <AnchorPane prefHeight="200.0" styleClass="background_style" SplitPane.resizableWithParent="false">
+                <TitledPane styleClass="background_style" alignment="CENTER" animated="false" collapsible="false" contentDisplay="BOTTOM" text="Add to warehouse" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                    <content>
+                        <GridPane styleClass="sub_background" alignment="CENTER" hgap="10" vgap="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <Button text="Show between dates" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <DatePicker fx:id="startDate" promptText="Start date" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <DatePicker fx:id="endDate" promptText="End date" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <Button text="Show last 10" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <Button text="Show all" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                     <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                     </rowConstraints>
+
+                        </GridPane>
+                    </content>
+                </TitledPane>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0">
+                <TitledPane alignment="CENTER" animated="false" collapsible="false" text="Purchase history" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                        <VBox alignment="TOP_RIGHT" spacing="0">
+                            <padding>
+                                <Insets bottom="0" left="0" right="0" top="0" />
+                            </padding>
+                            <TableView styleClass="blue_style">
+                                <columns>
+                                    <TableColumn text="Date">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="date" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn text="Time">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="time" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn text="Total">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="total" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+
+                                </columns>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                            </TableView>
+                            <TableView styleClass="blue_style">
+                                <columns>
+                                    <TableColumn text="Id">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="id" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn text="Name">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="name" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn text="Price">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="price" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn text="Quantity">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="quantity" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn text="Quantity">
+                                        <cellValueFactory>
+                                            <PropertyValueFactory property="quantity" />
+                                        </cellValueFactory>
+                                    </TableColumn>
+                                </columns>
+                                <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                </columnResizePolicy>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </TitledPane>
+            </AnchorPane>
+        </items>
+    </SplitPane>
+</AnchorPane>

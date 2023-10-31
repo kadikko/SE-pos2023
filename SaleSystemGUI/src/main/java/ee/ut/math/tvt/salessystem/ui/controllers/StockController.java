@@ -13,12 +13,13 @@ import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class StockController implements Initializable {
 
     private final SalesSystemDAO dao;
-    private static final Logger log = LogManager.getLogger(StockController.class);
+    private static final Logger log = LogManager.getLogger("StockController");
     @FXML
     private Button addItem;
     @FXML
@@ -44,6 +45,7 @@ public class StockController implements Initializable {
         priceField.textProperty().addListener((observable, oldValue, newValue) -> allowAddItem());//allows to keep track of inserted values
         quantityField.textProperty().addListener((observable, oldValue, newValue) -> allowAddItem());//and manage when item is ready to be added to the warehouse.
         nameField.textProperty().addListener((observable, oldValue, newValue) -> allowAddItem());
+        log.info("Warehouse info acquired");
         this.barCodeField.focusedProperty().addListener(new ChangeListener<Boolean>() {//adding already existing item
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
@@ -76,15 +78,19 @@ public class StockController implements Initializable {
         // add chosen item to the warehouse
         StockItem stockItem = getStockItemByBarcode();
         if (stockItem != null) {
+            log.debug("Product already exists");
             int quantity;
             try {
                 quantity = Integer.parseInt(quantityField.getText());//inserted quantity must be a number.
+                log.info("Existing product's info updated");
                 stockItem.setQuantity(stockItem.getQuantity() + quantity);
             } catch (NumberFormatException e) {
+                log.error("Amount - Inserted value was not an integer");
                 resetProductField();
             }
         }
         else {
+            log.debug("Adding new product to the warehouse");
             String name = nameField.getText();
             String description = "";
             long id = dao.findStockItems().size() + 1;
@@ -96,8 +102,10 @@ public class StockController implements Initializable {
                 quantity = Integer.parseInt(quantityField.getText());
                 StockItem newItem = new StockItem(id, name, description, price, quantity);
                 dao.saveStockItem(newItem);
+                log.info("New item added to warehouse");
             }
             catch (NumberFormatException e) {
+                log.error("Amount/Price - Incorrect value type: Item not added to the warehouse");
                 resetProductField();
             }
 
@@ -108,10 +116,13 @@ public class StockController implements Initializable {
     private void fillInputsBySelectedStockItem() {
         StockItem stockItem = getStockItemByBarcode();
         if (stockItem != null) {
+            log.debug("Product's inputs filled");
             nameField.setText(stockItem.getName());
             priceField.setText(String.valueOf(stockItem.getPrice()));
             barCodeField.setDisable(false);
         } else {
+            if (!Objects.equals(barCodeField.getText(), ""))
+                log.debug("Product by this barcode doesn't exist");
             resetProductField();
         }
     }
@@ -120,6 +131,8 @@ public class StockController implements Initializable {
             long code = Long.parseLong(barCodeField.getText());
             return dao.findStockItem(code);
         } catch (NumberFormatException e) {
+            if (!Objects.equals(barCodeField.getText(), ""))
+                log.error("Barcode - Inserted barcode value was incorrect");
             return null;
         }
     }
@@ -138,5 +151,6 @@ public class StockController implements Initializable {
     private void refreshStockItems() {
         warehouseTableView.setItems(FXCollections.observableList(dao.findStockItems()));
         warehouseTableView.refresh();
+        log.debug("Warehouse refreshed");
     }
 }

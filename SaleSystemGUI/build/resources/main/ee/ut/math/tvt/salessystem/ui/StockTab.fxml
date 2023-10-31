@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
@@ -8,11 +9,8 @@
 
     <SplitPane dividerPositions="0.4" orientation="VERTICAL" prefHeight="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-
-
-            <AnchorPane prefHeight="200.0" styleClass="background_style" SplitPane.resizableWithParent="false">
-
-                <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="BOTTOM" text="Add to warehouse" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <AnchorPane prefHeight="308.0" prefWidth="345.0" styleClass="background_style" SplitPane.resizableWithParent="false">
+                <TitledPane alignment="CENTER" animated="false" collapsible="false" contentDisplay="BOTTOM" text="Add to warehouse" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                     <content>
                         <GridPane prefWidth="214.0" styleClass="sub_background">
                             <columnConstraints>
@@ -29,9 +27,24 @@
                                 <ColumnConstraints />
                                 <ColumnConstraints />
                                 <ColumnConstraints />
-                        <ColumnConstraints />
-                        <ColumnConstraints />
-                        <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
+                                <ColumnConstraints />
                             </columnConstraints>
                             <rowConstraints>
                                 <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -47,9 +60,24 @@
                                 <RowConstraints />
                                 <RowConstraints />
                                 <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
-                        <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
                             </rowConstraints>
                             <children>
                                 <Label text="Bar Code:" />
@@ -65,12 +93,17 @@
                         </GridPane>
                     </content>
                 </TitledPane>
+                <Button onMouseClicked="#refreshButtonClicked" text="Refresh warehouse" AnchorPane.leftAnchor="10.0" AnchorPane.bottomAnchor="10.0"/>
             </AnchorPane>
 
             <AnchorPane prefHeight="200.0" styleClass="background_style" SplitPane.resizableWithParent="false">
-                <TitledPane alignment="CENTER" animated="false" collapsible="false" text="Warehouse status" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <BorderPane styleClass="background_style">
-                        <center>
+
+                <TitledPane alignment="CENTER" animated="false" collapsible="false" prefHeight="288.0" prefWidth="345.0" text="Warehouse status" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                        <VBox alignment="TOP_RIGHT" spacing="0">
+                            <padding>
+                                <Insets bottom="0" left="0" right="0" top="0" />
+                            </padding>
                             <TableView fx:id="warehouseTableView" BorderPane.alignment="CENTER">
                                 <columns>
                                     <TableColumn text="Id">
@@ -98,11 +131,10 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                 </columnResizePolicy>
                             </TableView>
-                        </center>
-                        <top>
-                            <Button onMouseClicked="#refreshButtonClicked" text="Refresh warehouse" BorderPane.alignment="TOP_LEFT" />
-                        </top>
-                    </BorderPane>
+                        </VBox>
+                    </content>
+
+
                 </TitledPane>
             </AnchorPane>
 

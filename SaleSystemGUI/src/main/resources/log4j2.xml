@@ -2,15 +2,16 @@
 <Configuration status="WARN">
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
+      <LevelRangeFilter minLevel="ERROR" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
       <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
     </Console>
   </Appenders>
   <Loggers>
-    <Root level="info">
+    <Root level="DEBUG">
       <AppenderRef ref="Console"/>
     </Root>
 
-    <logger name="Ratpack" level="info">
+    <logger name="Ratpack" level="DEBUG">
     </logger>
   </Loggers>
 </Configuration>
