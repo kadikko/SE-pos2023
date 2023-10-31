@@ -20,12 +20,12 @@ Task 1.
 1. Name at least one method where a breakpoint will stop the application execution right
 after pressing the "New purchase" button. 
 
-Answer: enableInputs()
+Answer:info(), enableInputs()
 
 2. Name a method where a breakpoint will stop the application execution right after
 pressing the "Confirm" button (while confirming the order). 
 
-Answer: shoppingCart.submitCurrentPurchase();
+Answer: info(), shoppingCart.submitCurrentPurchase();
 
 3. How many buttons are initialized when the application is started? You can add a
 breakpoint to Button.initialize(). 
