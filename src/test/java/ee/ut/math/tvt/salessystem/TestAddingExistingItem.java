@@ -1,4 +1,5 @@
-package ee.ut.math.tvt.salessystem.ui.controllers;
+package ee.ut.math.tvt.salessystem;
+
 
 import ee.ut.math.tvt.salessystem.dao.InMemorySalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
