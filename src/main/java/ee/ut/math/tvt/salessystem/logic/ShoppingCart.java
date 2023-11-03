@@ -22,24 +22,19 @@ public class ShoppingCart {
      */
     public void addItem(SoldItem item) {
         // TODO In case such stockItem already exists increase the quantity of the existing stock
-        boolean alreadyInCart = false;
         int quantityToBePurchased = item.getQuantity();
 
         for (SoldItem itemInCart:
              items) {
             if (Objects.equals(itemInCart.getName(), item.getName())){
                 quantityToBePurchased += itemInCart.getQuantity();
-                alreadyInCart = true;
-                item = itemInCart;
             }
         }
 
         // TODO verify that warehouse items' quantity remains at least zero or throw an exception
         int quantityInWarehouse = dao.findStockItem(item.getStockItem().getId()).getQuantity();
         if (quantityToBePurchased <= quantityInWarehouse) {
-            if(alreadyInCart){item.setQuantity(quantityToBePurchased);}
-            else{
-            items.add(item);}
+            items.add(item);
         } else {
             System.out.println("Not enough stock in warehouse");
         }
