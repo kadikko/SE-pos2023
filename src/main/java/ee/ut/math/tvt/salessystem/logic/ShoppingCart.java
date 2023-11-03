@@ -22,23 +22,27 @@ public class ShoppingCart {
      */
     public void addItem(SoldItem item) {
         // TODO In case such stockItem already exists increase the quantity of the existing stock
+        boolean alreadyInCart = false;
         int quantityToBePurchased = item.getQuantity();
 
         for (SoldItem itemInCart:
              items) {
             if (Objects.equals(itemInCart.getName(), item.getName())){
                 quantityToBePurchased += itemInCart.getQuantity();
+                alreadyInCart = true;
+                item = itemInCart;
             }
         }
 
         // TODO verify that warehouse items' quantity remains at least zero or throw an exception
         int quantityInWarehouse = dao.findStockItem(item.getStockItem().getId()).getQuantity();
-        if (quantityToBePurchased <= quantityInWarehouse){
-            items.add(item);
+        if (quantityToBePurchased <= quantityInWarehouse) {
+            if(alreadyInCart){item.setQuantity(quantityToBePurchased);}
+            else{
+            items.add(item);}
         } else {
             System.out.println("Not enough stock in warehouse");
         }
-
         //log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
     }
 
@@ -48,6 +52,13 @@ public class ShoppingCart {
 
     public void cancelCurrentPurchase() {
         items.clear();
+    }
+    public double totalOfCart(){//counts total sum of shopping cart for history.
+        double totalSum = 0;
+        for (SoldItem item : items) {
+            totalSum += item.getSum();
+        }
+        return totalSum;
     }
 
     public void submitCurrentPurchase() {

@@ -67,11 +67,12 @@ public class ConsoleUI {
     private void showCart() {
         System.out.println("-------------------------");
         for (SoldItem si : cart.getAll()) {
-            System.out.println(si.getName() + " " + si.getPrice() + "Euro (" + si.getQuantity() + " items)");
+            System.out.println(si.getName() + " " + si.getPrice() + "Euro (" + si.getQuantity() + " items)" + " Sum: " + si.getSum() + "Euro");
         }
         if (cart.getAll().isEmpty()) {
             System.out.println("\tNothing");
         }
+        System.out.println("Total: " + cart.totalOfCart() + "Euro");
         System.out.println("-------------------------");
     }
 
