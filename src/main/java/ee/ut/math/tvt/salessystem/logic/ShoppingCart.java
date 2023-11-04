@@ -1,8 +1,10 @@
 package ee.ut.math.tvt.salessystem.logic;
 
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
+import ee.ut.math.tvt.salessystem.dataobjects.PreviousCart;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +14,13 @@ public class ShoppingCart {
 
     private final SalesSystemDAO dao;
     private final List<SoldItem> items = new ArrayList<>();
+    private final List<PreviousCart> carts;
+
 
     public ShoppingCart(SalesSystemDAO dao) {
         this.dao = dao;
+        this.carts = dao.findPreviousCartList();
+
     }
 
     /**
@@ -64,6 +70,9 @@ public class ShoppingCart {
             int updatedQuantity = previousQuantity - item.getQuantity();
             stockItem.setQuantity(updatedQuantity);
         }
+        List<SoldItem> currentCopy = new ArrayList<>(items);
+        PreviousCart current = new PreviousCart(currentCopy);
+        dao.savePreviousCart(current);
 
 
         // note the use of transactions. InMemorySalesSystemDAO ignores transactions

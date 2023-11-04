@@ -860,3 +860,25 @@ Text {
     -fx-opacity: .4;
      
 }
+
+/*******************************************************************************
+ *                                                                             *
+ * Datepicker                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+
+.date-picker .date-picker-popup {
+    -fx-background-color: title_color; /* Your desired blue background */
+}
+
+.date-picker .month-year-pane {
+    -fx-background-color: title_color; /* Your desired blue background */
+}
+
+.date-picker .day-cell {
+    -fx-background-color: sb_color; /* Use sb_color variable for the small boxes */
+    -fx-text-fill: main_text_color; /* Use main_text_color variable for the text */
+}
+.date-picker .day-cell:focused {
+    -fx-background-color: b_color;
+}

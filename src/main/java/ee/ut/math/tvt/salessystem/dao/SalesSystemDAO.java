@@ -1,5 +1,6 @@
 package ee.ut.math.tvt.salessystem.dao;
 
+import ee.ut.math.tvt.salessystem.dataobjects.PreviousCart;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 
@@ -32,9 +33,15 @@ public interface SalesSystemDAO {
 
     StockItem findStockItem(long id);
 
+    List<PreviousCart> findPreviousCartList();
+
+
     void saveStockItem(StockItem stockItem);
 
     void saveSoldItem(SoldItem item);
+
+    void savePreviousCart(PreviousCart previousCart);
+
 
     void beginTransaction();
 
