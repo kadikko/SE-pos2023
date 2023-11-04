@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -73,7 +74,9 @@ public class PurchaseController implements Initializable {
         log.info("Purchase info acquired");
     }
 
-    /** Event handler for the <code>new purchase</code> event. */
+    /**
+     * Event handler for the <code>new purchase</code> event.
+     */
     @FXML
     protected void newPurchaseButtonClicked() {
         log.info("New sale process started");
@@ -166,10 +169,10 @@ public class PurchaseController implements Initializable {
             int quantity;
             try {
                 quantity = Integer.parseInt(quantityField.getText());
+                shoppingCart.addItem(new SoldItem(stockItem, quantity));
             } catch (NumberFormatException e) {
-                quantity = 1;
+                new Alert(Alert.AlertType.WARNING, "Inserted quantity was not a number. Try again.").show();
             }
-            shoppingCart.addItem(new SoldItem(stockItem, quantity));
             purchaseTableView.refresh();
         }
     }

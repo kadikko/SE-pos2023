@@ -6,6 +6,7 @@ import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
@@ -91,12 +92,14 @@ public class HistoryController implements Initializable {
         if (start == null || end == null) {
             // Alert or log that no date is selected if required.
             System.out.println("Please select both start and end dates.");
+            new Alert(Alert.AlertType.WARNING, "Please select both start and end dates. Try again.").show();
             return;
         }
 
         if (start.isAfter(end)) {
             // Alert or log that the dates are invalid if required.
             System.out.println("Start date must be before end date.");
+            new Alert(Alert.AlertType.WARNING, "Start date must be before end date. Try again.").show();
             return;
         }
 
