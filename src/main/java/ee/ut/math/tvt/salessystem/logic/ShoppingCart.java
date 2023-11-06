@@ -26,6 +26,14 @@ public class ShoppingCart {
 
     }
 
+    public boolean validateQuantityNotNegative(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative. ");
+        } else {
+            return true;
+        }
+    }
+
     /**
      * Add new SoldItem to table.
      */
@@ -46,20 +54,18 @@ public class ShoppingCart {
         // TODO verify that warehouse items' quantity remains at least zero or throw an exception
         int quantityInWarehouse = dao.findStockItem(item.getStockItem().getId()).getQuantity();
         try {
-            if (quantityToBePurchased > 0 && quantityToBePurchased <= quantityInWarehouse) {
-                if(alreadyInCart){
+            if (validateQuantityNotNegative(quantityToBePurchased) && quantityToBePurchased <= quantityInWarehouse) {
+                if (alreadyInCart) {
                     item.setQuantity(quantityToBePurchased);
-                }
-                else{
+                } else {
                     items.add(item);
-                    log.debug("Added " + item.getName() + "with the quantity of " + item.getQuantity());}
-            } else if (quantityToBePurchased < 0) {
-                throw new IllegalArgumentException("Quantity cannot be negative. ");
+                    log.debug("Added " + item.getName() + "with the quantity of " + item.getQuantity());
+                }
             } else {
                 throw new SalesSystemException("Quantity exceeds stock in warehouse. ");
             }
         } catch (IllegalArgumentException e) {
-            log.error("Quantity cannot be negative");
+            log.error("Quantity cannot be negative.");
         } catch (SalesSystemException e) {
             log.error("Quantity exceeds stock in warehouse");
         }
