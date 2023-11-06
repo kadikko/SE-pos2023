@@ -1,6 +1,7 @@
 package ee.ut.math.tvt.salessystem.ui.controllers;
 
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
+import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,12 +15,9 @@ import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
-import static javax.swing.JOptionPane.showMessageDialog;
 
 public class StockController implements Initializable {
 
@@ -79,49 +77,70 @@ public class StockController implements Initializable {
     }
     // TODO refresh view after adding new items
 
+    public void addExistingItemToWarehouse(StockItem stockItem) {
+        log.debug("Product already exists");
+        int quantity;
+
+        try {
+            quantity = Integer.parseInt(quantityField.getText());//inserted quantity must be a number.
+            log.info("Existing product's info updated");
+            // inserted quantity cannot be negative
+            if (quantity > 0) {
+                stockItem.setQuantity(stockItem.getQuantity() + quantity);
+            } else {
+                throw new IllegalArgumentException("Inserted quantity was negative. ");
+            }
+        } catch (NumberFormatException e) {
+            log.error("Amount - Inserted value was not an integer");
+            new Alert(Alert.AlertType.WARNING, "Inserted quantity was not a number. Try again.").show();
+        } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
+            new Alert(Alert.AlertType.WARNING, e.getMessage() + "Try again.").show();
+        }
+    }
+
+    public void addNewItemToWarehouse() {
+        log.debug("Adding new product to the warehouse");
+        String name = nameField.getText();
+        String description = "";
+        long id = dao.findStockItems().size() + 1;
+        double price;
+        int quantity;
+
+        dao.beginTransaction();
+        try {
+            price = Double.parseDouble(priceField.getText());//inserted price has to be number.
+            quantity = Integer.parseInt(quantityField.getText());
+            if (price > 0 && quantity > 0) {
+                StockItem newItem = new StockItem(id, name, description, price, quantity);
+                dao.saveStockItem(newItem);
+                dao.commitTransaction();
+                log.info("New item added to warehouse");
+            } else {
+                throw new IllegalArgumentException("Inserted price/quantity was negative. ");
+            }
+        } catch (NumberFormatException e) {
+            log.error("Amount/Price - Incorrect value type: Item not added to the warehouse. ");
+            dao.rollbackTransaction();
+            new Alert(Alert.AlertType.WARNING, "Price/amount must be numbers. Try again.").show();
+        } catch (IllegalArgumentException e) {
+            log.error(e.getMessage());
+            dao.rollbackTransaction();
+            new Alert(Alert.AlertType.WARNING, e.getMessage() + "Try again.").show();
+        }
+    }
+
     @FXML
     public void addStockItemEventHandler() {
         // add chosen item to the warehouse
         StockItem stockItem = getStockItemByBarcode();
+
+        // adding already existing item to warehouse
         if (stockItem != null) {
-            log.debug("Product already exists");
-            int quantity;
-            try {
-                quantity = Integer.parseInt(quantityField.getText());//inserted quantity must be a number.
-                log.info("Existing product's info updated");
-                // inserted quantity cannot be negative
-                if (quantity > 0) {
-                    stockItem.setQuantity(stockItem.getQuantity() + quantity);
-                } else {
-                    throw new IllegalArgumentException("Inserted quantity was negative. ");
-                }
-            } catch (NumberFormatException e) {
-                log.error("Amount - Inserted value was not an integer");
-                new Alert(Alert.AlertType.WARNING, "Inserted quantity was not a number. Try again.").show();
-            } catch (IllegalArgumentException e) {
-                log.error(e.getMessage());
-                new Alert(Alert.AlertType.WARNING, e.getMessage() + "Try again.").show();
-            }
-
+            addExistingItemToWarehouse(stockItem);
         } else {
-            log.debug("Adding new product to the warehouse");
-            String name = nameField.getText();
-            String description = "";
-            long id = dao.findStockItems().size() + 1;
-            double price;
-            int quantity;
-
-            try {
-                price = Double.parseDouble(priceField.getText());//inserted price has to be number.
-                quantity = Integer.parseInt(quantityField.getText());
-                StockItem newItem = new StockItem(id, name, description, price, quantity);
-                dao.saveStockItem(newItem);
-                log.info("New item added to warehouse");
-            } catch (NumberFormatException e) {
-                log.error("Amount/Price - Incorrect value type: Item not added to the warehouse");
-                new Alert(Alert.AlertType.WARNING, "Price/amount must be numbers. Try again.").show();
-                resetProductField();
-            }
+            // adding new item to warehouse
+            addNewItemToWarehouse();
         }
         resetProductField();//after adding to the warehouse.
         refreshStockItems();
