@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -20,7 +22,7 @@ import java.util.stream.Collectors;
 
 public class HistoryController implements Initializable {
     private  SalesSystemDAO dao;
-
+    private static final Logger log = LogManager.getLogger("HistoryController");
     @FXML
     private Button betweenDates;
     @FXML
@@ -57,6 +59,7 @@ public class HistoryController implements Initializable {
     //sorts the List<PreviousCart> by date and time from newest to oldest.
     private List<PreviousCart> getSortedCarts() {
         List<PreviousCart> sortedCarts = new ArrayList<>(dao.findPreviousCartList());
+        //log.debug("History sorted by date from newest to oldest"); displays needlessly too often
         sortedCarts.sort((cart1, cart2) -> {
             int dateCompare = cart2.getDate().compareTo(cart1.getDate());
             if (dateCompare == 0) {
@@ -69,6 +72,7 @@ public class HistoryController implements Initializable {
 
     //shows all carts
     public void showAll() {
+        log.debug("Showing all carts");
         List<PreviousCart> sortedCarts = getSortedCarts();
         listPurchases.setItems(FXCollections.observableList(sortedCarts));
         listPurchases.refresh();
@@ -76,6 +80,7 @@ public class HistoryController implements Initializable {
 
     //shows last 10 carts
     public void show10() {
+        log.debug("Showing the last 10 carts");
         List<PreviousCart> sortedCarts = getSortedCarts();
         int endIndex = Math.min(sortedCarts.size(), 10);
         List<PreviousCart> last10Carts = sortedCarts.subList(0, endIndex);
@@ -91,14 +96,16 @@ public class HistoryController implements Initializable {
 
         if (start == null || end == null) {
             // Alert or log that no date is selected if required.
-            System.out.println("Please select both start and end dates.");
+            log.debug("History not shown - dates not selected");
+           //System.out.println("Please select both start and end dates.");
             new Alert(Alert.AlertType.WARNING, "Please select both start and end dates. Try again.").show();
             return;
         }
 
         if (start.isAfter(end)) {
             // Alert or log that the dates are invalid if required.
-            System.out.println("Start date must be before end date.");
+            log.debug("History not shown - start date was after end date");
+            //System.out.println("Start date must be before end date.");
             new Alert(Alert.AlertType.WARNING, "Start date must be before end date. Try again.").show();
             return;
         }
@@ -108,7 +115,7 @@ public class HistoryController implements Initializable {
         List<PreviousCart> filteredCarts = sortedCarts.stream()
                 .filter(cart -> !cart.getDate().isBefore(start) && !cart.getDate().isAfter(end))
                 .collect(Collectors.toList());
-
+        log.debug("Showing carts between " + start + " - " + end);
         listPurchases.setItems(FXCollections.observableList(filteredCarts));
         listPurchases.refresh();
     }
