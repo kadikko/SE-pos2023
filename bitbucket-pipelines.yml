@@ -2,5 +2,9 @@ image: openjdk:11
 pipelines:
   default:
     - step:
+        name: Build and Test
         script:
-          - ./gradlew test
+          - chmod +x gradlew
+          - ./gradlew build
+        caches:
+          - gradle
