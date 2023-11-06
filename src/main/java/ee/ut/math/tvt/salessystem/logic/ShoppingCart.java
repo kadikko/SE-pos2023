@@ -5,6 +5,8 @@ import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dataobjects.PreviousCart;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ShoppingCart {
-
+    private static final Logger log = LogManager.getLogger("ShoppingCart");
     private final SalesSystemDAO dao;
     private final List<SoldItem> items = new ArrayList<>();
     private final List<PreviousCart> carts;
@@ -37,6 +39,7 @@ public class ShoppingCart {
                 quantityToBePurchased += itemInCart.getQuantity();
                 alreadyInCart = true;
                 item = itemInCart;
+                log.debug("Increased the quantity of " + item.getName() + " - new total quantity is " + quantityToBePurchased);
             }
         }
 
@@ -48,17 +51,18 @@ public class ShoppingCart {
                     item.setQuantity(quantityToBePurchased);
                 }
                 else{
-                    items.add(item);}
+                    items.add(item);
+                    log.debug("Added " + item.getName() + "with the quantity of " + item.getQuantity());}
             } else if (quantityToBePurchased < 0) {
                 throw new IllegalArgumentException("Quantity cannot be negative. ");
             } else {
                 throw new SalesSystemException("Quantity exceeds stock in warehouse. ");
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Quantity cannot be negative");
+            log.error("Quantity cannot be negative");
             //new Alert(Alert.AlertType.WARNING, "Quantity cannot be negative. Try again.").show();
         } catch (SalesSystemException e) {
-            System.out.println("Quantity exceeds stock in warehouse");
+            log.error("Quantity exceeds stock in warehouse");
             //new Alert(Alert.AlertType.WARNING, "Quantity exceeds stock in warehouse. Only " + item.getQuantity() + " left in stock. Try again.").show();
         }
 
@@ -88,10 +92,12 @@ public class ShoppingCart {
             int previousQuantity = stockItem.getQuantity();
             int updatedQuantity = previousQuantity - item.getQuantity();
             stockItem.setQuantity(updatedQuantity);
+            log.debug("Warehouse quantity updated");
         }
         List<SoldItem> currentCopy = new ArrayList<>(items);
         PreviousCart current = new PreviousCart(currentCopy);
         dao.savePreviousCart(current);
+        log.info("Purchase recorded");
 
 
         // note the use of transactions. InMemorySalesSystemDAO ignores transactions
@@ -105,6 +111,7 @@ public class ShoppingCart {
             dao.commitTransaction();
             items.clear();
         } catch (Exception e) {
+            log.error(e.getMessage());
             dao.rollbackTransaction();
             throw e;
         }
