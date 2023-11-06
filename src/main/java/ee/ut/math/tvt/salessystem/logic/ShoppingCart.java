@@ -60,10 +60,8 @@ public class ShoppingCart {
             }
         } catch (IllegalArgumentException e) {
             log.error("Quantity cannot be negative");
-            //new Alert(Alert.AlertType.WARNING, "Quantity cannot be negative. Try again.").show();
         } catch (SalesSystemException e) {
             log.error("Quantity exceeds stock in warehouse");
-            //new Alert(Alert.AlertType.WARNING, "Quantity exceeds stock in warehouse. Only " + item.getQuantity() + " left in stock. Try again.").show();
         }
 
         //log.debug("Added " + item.getName() + " quantity of " + item.getQuantity());
