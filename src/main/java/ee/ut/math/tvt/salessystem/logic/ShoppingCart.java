@@ -30,11 +30,13 @@ public class ShoppingCart {
     public void addItem(SoldItem item) {
         // TODO In case such stockItem already exists increase the quantity of the existing stock
         int quantityToBePurchased = item.getQuantity();
-
+        boolean alreadyInCart = false;
         for (SoldItem itemInCart :
                 items) {
             if (Objects.equals(itemInCart.getName(), item.getName())) {
                 quantityToBePurchased += itemInCart.getQuantity();
+                alreadyInCart = true;
+                item = itemInCart;
             }
         }
 
@@ -42,7 +44,11 @@ public class ShoppingCart {
         int quantityInWarehouse = dao.findStockItem(item.getStockItem().getId()).getQuantity();
         try {
             if (quantityToBePurchased > 0 && quantityToBePurchased <= quantityInWarehouse) {
-                items.add(item);
+                if(alreadyInCart){
+                    item.setQuantity(quantityToBePurchased);
+                }
+                else{
+                    items.add(item);}
             } else if (quantityToBePurchased < 0) {
                 throw new IllegalArgumentException("Quantity cannot be negative. ");
             } else {
