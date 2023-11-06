@@ -83,7 +83,7 @@ public class PurchaseController implements Initializable {
         try {
             enableInputs();
         } catch (SalesSystemException e) {
-            log.error(e.getMessage() + "aayayayayayayay");
+            log.error(e.getMessage());
         }
     }
 
@@ -98,7 +98,7 @@ public class PurchaseController implements Initializable {
             disableInputs();
             purchaseTableView.refresh();
         } catch (SalesSystemException e) {
-            log.error(e.getMessage() + "aeaeaeaeaeaeae");
+            log.error(e.getMessage());
         }
     }
 
@@ -114,7 +114,7 @@ public class PurchaseController implements Initializable {
             disableInputs();
             purchaseTableView.refresh();
         } catch (SalesSystemException e) {
-            log.error(e.getMessage() + "aagagagagagagag");
+            log.error(e.getMessage());
         }
     }
 
@@ -176,8 +176,12 @@ public class PurchaseController implements Initializable {
             int quantity;
             try {
                 quantity = Integer.parseInt(quantityField.getText());
-                shoppingCart.addItem(new SoldItem(stockItem, quantity));
-                log.debug(stockItem.getName() + " added to cart");
+                if (quantity <= stockItem.getQuantity() && quantity > 0) {
+                    shoppingCart.addItem(new SoldItem(stockItem, quantity));
+                    log.debug(stockItem.getName() + " added to cart");
+                }
+                else if (quantity < 1) log.error("Inserted quantity cannot be negative");
+                else log.error("Inserted quantity exceeds warehouse stock - cart update failed");
             } catch (NumberFormatException e) {
                 new Alert(Alert.AlertType.WARNING, "Inserted quantity was not a number. Try again.").show();
                 log.error("Incorrect quantity inserted");
