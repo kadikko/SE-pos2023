@@ -26,26 +26,28 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
         this.stockItemList = items;
         this.soldItemList = new ArrayList<>();
 
-        Random random = new Random();
-        List<PreviousCart> previousCartsItems = new ArrayList<PreviousCart>();
-        for(int n = 0; n<15; n++){
-            List<SoldItem> soldItems = new ArrayList<SoldItem>();
-            int itemsNum = random.nextInt(5)+1;
-            for (int i=0; i<itemsNum; i++){
-                int whatItem = random.nextInt(4);
-                int whatQuantity = random.nextInt(10)+1;
-                soldItems.add(new SoldItem(items.get(whatItem), whatQuantity));
-            }
-            PreviousCart temp = new PreviousCart(soldItems);
-            LocalDate date = LocalDate.now().minusDays(random.nextInt(1000));
-            LocalTime time = LocalTime.now().minusHours(random.nextInt(24)).minusMinutes(random.nextInt(60));
-            temp.setDate(date);
-            temp.setTime(time);
-            previousCartsItems.add(temp);
 
-        }
-        this.previousCartList = previousCartsItems;
-        //this.previousCartList = new ArrayList<>();
+//        UNCOMMENT TO SEE HISTORY TAB WITH MADEUP CARTS
+//        Random random = new Random();
+//        List<PreviousCart> previousCartsItems = new ArrayList<PreviousCart>();
+//        for(int n = 0; n<15; n++){
+//            List<SoldItem> soldItems = new ArrayList<SoldItem>();
+//            int itemsNum = random.nextInt(5)+1;
+//            for (int i=0; i<itemsNum; i++){
+//                int whatItem = random.nextInt(4);
+//                int whatQuantity = random.nextInt(10)+1;
+//                soldItems.add(new SoldItem(items.get(whatItem), whatQuantity));
+//            }
+//            PreviousCart temp = new PreviousCart(soldItems);
+//            LocalDate date = LocalDate.now().minusDays(random.nextInt(1000));
+//            LocalTime time = LocalTime.now().minusHours(random.nextInt(24)).minusMinutes(random.nextInt(60));
+//            temp.setDate(date);
+//            temp.setTime(time);
+//            previousCartsItems.add(temp);
+//
+//        }
+//        this.previousCartList = previousCartsItems;
+        this.previousCartList = new ArrayList<>(); //COMMET THIS OUT, IF YOU WANT TO USE MADE UP CARTS
     }
 
     @Override

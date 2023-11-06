@@ -44,6 +44,10 @@ public class PreviousCart {
         this.time = time;
     }
 
+    public double getTotal() {
+        return cart.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
+    }
+
     @Override
     public String toString() {
         return "Cart"+cart+ ";Date: "+date + "; Time: "+time;
