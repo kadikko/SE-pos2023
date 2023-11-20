@@ -3,9 +3,11 @@ import ee.ut.math.tvt.salessystem.dataobjects.PreviousCart;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class HibernateSalesSystemDAO implements SalesSystemDAO {
@@ -30,6 +32,10 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public StockItem findStockItem(long id) {
+        for (StockItem item : em.createQuery("from StockItem ", StockItem.class).getResultList()) {
+            if (item.getId() == id)
+                return item;
+        }
         return null;
     }
 
@@ -40,7 +46,7 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
 
     @Override
     public void saveStockItem(StockItem stockItem) {
-
+        em.merge(stockItem);
     }
 
     @Override
