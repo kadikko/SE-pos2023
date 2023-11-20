@@ -11,8 +11,12 @@ public class PreviousCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
-    @JoinColumn(name = "SOLDITEM_ID", nullable = false)
+    @ManyToMany
+    @JoinTable(
+            name = "PREVIOUSCART_TO_SOLDITEM",
+            joinColumns = @JoinColumn(name = "PREVIOUSCART_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
+    )
     private List<SoldItem> cart;
     @Column(name = "date")
     private LocalDate date;

@@ -100,6 +100,7 @@ public class StockController implements Initializable {
     }
 
     public void addNewItemToWarehouse() {
+
         log.debug("Adding new product to the warehouse");
         String name = nameField.getText();
         String description = "";
@@ -134,6 +135,7 @@ public class StockController implements Initializable {
     public void addStockItemEventHandler() {
         // add chosen item to the warehouse
         StockItem stockItem = getStockItemByBarcode();
+
 
         // adding already existing item to warehouse
         if (stockItem != null) {
