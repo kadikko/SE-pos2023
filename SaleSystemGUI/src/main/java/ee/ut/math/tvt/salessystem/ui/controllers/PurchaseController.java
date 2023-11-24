@@ -141,6 +141,7 @@ public class PurchaseController implements Initializable {
         if (stockItem != null) {
             nameField.setText(stockItem.getName());
             priceField.setText(String.valueOf(stockItem.getPrice()));
+            log.debug("Inputs filled automatically");
         } else {
             resetProductField();
         }
@@ -151,9 +152,17 @@ public class PurchaseController implements Initializable {
     private StockItem getStockItemByBarcode() {
         try {
             long code = Long.parseLong(barCodeField.getText());
-            return dao.findStockItem(code);
+            if (code > dao.findStockItems().size() || code < 1) {
+                log.error("No item with barcode " + code + " exists");
+                new Alert(Alert.AlertType.WARNING, "No item with barcode " + code + " exists. Try again.").show();
+
+                return null;
+            } else {//log.debug(dao.findStockItem(code).getName() + " acquired by barcode"); -- displayed too often
+                return dao.findStockItem(code);
+            }
         } catch (NumberFormatException e) {
-            log.error(e.getMessage());
+            log.error("Invalid barcode input");
+            new Alert(Alert.AlertType.WARNING, "Invalid barcode input. Barcode has to be a number. Try again.").show();
             return null;
         }
     }
@@ -169,9 +178,19 @@ public class PurchaseController implements Initializable {
             int quantity;
             try {
                 quantity = Integer.parseInt(quantityField.getText());
-                shoppingCart.addItem(new SoldItem(stockItem, quantity));
+                if (quantity <= stockItem.getQuantity() && quantity > 0) {
+                    shoppingCart.addItem(new SoldItem(stockItem, quantity));
+                    log.debug(stockItem.getName() + " added to cart");
+                } else if (quantity < 1) {
+                    log.error("Inserted quantity cannot be negative");
+                    new Alert(Alert.AlertType.WARNING, "Quantity cannot be negative. Try again.").show();
+                } else {
+                    log.error("Inserted quantity exceeds warehouse stock - cart update failed");
+                    new Alert(Alert.AlertType.WARNING, "Quantity exceeds stock in warehouse. Only " + stockItem.getQuantity() + " left in stock. Try again.").show();
+                }
             } catch (NumberFormatException e) {
                 new Alert(Alert.AlertType.WARNING, "Inserted quantity was not a number. Try again.").show();
+                log.error("Incorrect quantity inserted");
             }
             purchaseTableView.refresh();
         }

@@ -1,7 +1,9 @@
-image: openjdk:11
+image: openjdk:17
+
 pipelines:
   default:
-    - step:
-        script:
-          - chmod +x gradlew
-          - ./gradlew test
+    - parallel:
+      - step:
+          script:
+            - chmod +x gradlew
+            - ./gradlew test

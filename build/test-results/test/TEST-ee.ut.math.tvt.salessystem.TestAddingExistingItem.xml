@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ee.ut.math.tvt.salessystem.TestAddingExistingItem" tests="1" skipped="1" failures="0" errors="0" timestamp="2023-11-06T09:33:31" hostname="Kadis-Air.lan" time="0.002">
+<testsuite name="ee.ut.math.tvt.salessystem.TestAddingExistingItem" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-14T12:35:43" hostname="DESKTOP-PNCPHDF" time="0.538">
   <properties/>
-  <testcase name="Should show if adding an exiting item increases the stock quantity and if the saveStockItem method of the DAO is not called" classname="ee.ut.math.tvt.salessystem.TestAddingExistingItem" time="0.002">
-    <skipped/>
-  </testcase>
+  <testcase name="Should show if adding an exiting item increases the stock quantity and if the saveStockItem method of the DAO is not called" classname="ee.ut.math.tvt.salessystem.TestAddingExistingItem" time="0.538"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

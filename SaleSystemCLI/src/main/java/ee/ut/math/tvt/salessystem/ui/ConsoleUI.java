@@ -1,8 +1,10 @@
 package ee.ut.math.tvt.salessystem.ui;
 
 import ee.ut.math.tvt.salessystem.SalesSystemException;
+import ee.ut.math.tvt.salessystem.dao.HibernateSalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.InMemorySalesSystemDAO;
 import ee.ut.math.tvt.salessystem.dao.SalesSystemDAO;
+import ee.ut.math.tvt.salessystem.dataobjects.PreviousCart;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import ee.ut.math.tvt.salessystem.logic.ShoppingCart;
@@ -11,9 +13,12 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.util.JsonUtils;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * A simple CLI (limited functionality).
@@ -30,7 +35,7 @@ public class ConsoleUI {
     }
 
     public static void main(String[] args) throws Exception {
-        SalesSystemDAO dao = new InMemorySalesSystemDAO();
+        SalesSystemDAO dao = new HibernateSalesSystemDAO();
         ConsoleUI console = new ConsoleUI(dao);
         console.run();
     }
@@ -88,6 +93,7 @@ public class ConsoleUI {
         System.out.println("p\t\tPurchase the shopping cart");
         System.out.println("r\t\tReset the shopping cart");
         System.out.println("t\t\tShow team view");
+        System.out.println("sh\t\tShow history view");
         System.out.println("-------------------------");
     }
 
@@ -136,7 +142,7 @@ public class ConsoleUI {
                     log.error("no stock item with id " + idx);
                     log.debug("Updating existing item failed");
                 }
-            } catch (SalesSystemException | NoSuchElementException e) {
+            } catch (SalesSystemException | NoSuchElementException | NumberFormatException e) {
                 log.error(e.getMessage());
             }
         }
@@ -153,13 +159,57 @@ public class ConsoleUI {
                 double price = Double.parseDouble(cmd[3]);
                 log.info("Adding new item to warehouse");
                 dao.saveStockItem(new StockItem(idx, name.toString(), "", price, amount));
-            } catch (NumberFormatException e) {
+            } catch (SalesSystemException | NoSuchElementException | NumberFormatException e) {
                 log.error(e.getMessage());
             }
-        } else log.info("Unknown command");
+        } else log.debug("Unknown command");
         printUsage();
     }
-    private void processCommand(String command) throws IOException {
+
+    private void showHistory() throws IOException {
+        addHistoryHelp();
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String[] cmd = in.readLine().trim().split(" ");
+        if (cmd[0].equalsIgnoreCase("q")) System.exit(0);
+        else if (cmd[0].equalsIgnoreCase("sa")) {
+            log.debug("Showing the history of all purchases");
+            List<PreviousCart> history = getSortedCarts();
+            for (PreviousCart asi : history) {
+                System.out.println(asi.getDate() +" "+ asi.getTime() + ": " + asi.getCart());
+            }
+        }
+        else if (cmd[0].equalsIgnoreCase("s10")) {
+            log.debug("Showing the history of last 10 purchases");
+            List<PreviousCart> history = getSortedCarts();
+            int counter = 0;
+            for (PreviousCart asi : history) {
+                if (counter < 10) {
+                    System.out.println(asi.getDate() + " " + asi.getTime() + ": " + asi.getCart());
+                    counter++;
+                } else break;
+            }
+        } else log.debug("Unknown command");
+        printUsage();
+    }
+    private List<PreviousCart> getSortedCarts() {
+        List<PreviousCart> sortedCarts = new ArrayList<>(dao.findPreviousCartList());
+        sortedCarts.sort((cart1, cart2) -> {
+            int dateCompare = cart2.getDate().compareTo(cart1.getDate());
+            if (dateCompare == 0) {
+                return cart2.getTime().compareTo(cart1.getTime());
+            }
+            return dateCompare;
+        });
+        return sortedCarts;
+    }
+    private void addHistoryHelp() {
+        System.out.println("-------------------------");
+        System.out.println("s10\t\t- Show last 10");
+        System.out.println("sa\t\t- Show all");
+        System.out.println("-------------------------");
+
+    }
+    private void processCommand(String command) throws IOException  {
         String[] c = command.split(" ");
 
         if (c[0].equals("h")) {
@@ -212,8 +262,12 @@ public class ConsoleUI {
             log.debug("Warehouse updated");
             showStock();
         }
+        else if (c[0].equals("sh")) {
+            log.debug("Showing history");
+            showHistory();
+        }
         else {
-            log.info("Unknown command");
+            log.debug("Unknown command");
         }
     }
 

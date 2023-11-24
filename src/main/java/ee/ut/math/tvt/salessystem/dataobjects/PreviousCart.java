@@ -1,12 +1,26 @@
 package ee.ut.math.tvt.salessystem.dataobjects;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+@Entity
+@Table(name = "PREVIOUSCART")
 public class PreviousCart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToMany
+    @JoinTable(
+            name = "PREVIOUSCART_TO_SOLDITEM",
+            joinColumns = @JoinColumn(name = "PREVIOUSCART_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
+    )
     private List<SoldItem> cart;
+    @Column(name = "date")
     private LocalDate date;
+    @Column(name = "time")
     private LocalTime time;
 
 
@@ -16,8 +30,9 @@ public class PreviousCart {
         this.time = LocalTime.now();
     }
 
+    public PreviousCart() {
 
-
+    }
 
 
     public List<SoldItem> getCart() {
@@ -42,6 +57,10 @@ public class PreviousCart {
 
     public void setTime(LocalTime time) {
         this.time = time;
+    }
+
+    public double getTotal() {
+        return cart.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
     }
 
     @Override

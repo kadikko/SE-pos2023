@@ -80,6 +80,7 @@ public class StockController implements Initializable {
     public void addExistingItemToWarehouse(StockItem stockItem) {
         log.debug("Product already exists");
         int quantity;
+        dao.beginTransaction();
 
         try {
             quantity = Integer.parseInt(quantityField.getText());//inserted quantity must be a number.
@@ -87,6 +88,7 @@ public class StockController implements Initializable {
             // inserted quantity cannot be negative
             if (quantity > 0) {
                 stockItem.setQuantity(stockItem.getQuantity() + quantity);
+                dao.commitTransaction();
             } else {
                 throw new IllegalArgumentException("Inserted quantity was negative. ");
             }
@@ -100,6 +102,7 @@ public class StockController implements Initializable {
     }
 
     public void addNewItemToWarehouse() {
+
         log.debug("Adding new product to the warehouse");
         String name = nameField.getText();
         String description = "";
@@ -134,6 +137,7 @@ public class StockController implements Initializable {
     public void addStockItemEventHandler() {
         // add chosen item to the warehouse
         StockItem stockItem = getStockItemByBarcode();
+
 
         // adding already existing item to warehouse
         if (stockItem != null) {
