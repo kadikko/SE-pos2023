@@ -92,21 +92,15 @@ public class ShoppingCart {
     public void submitCurrentPurchase() {
         // TODO decrease quantities of the warehouse stock
         for (SoldItem item : items) {
+            //dao.beginTransaction();
             StockItem stockItem = dao.findStockItem(item.getStockItem().getId());
             int previousQuantity = stockItem.getQuantity();
             int updatedQuantity = previousQuantity - item.getQuantity();
             stockItem.setQuantity(updatedQuantity);
             log.debug("Warehouse quantity updated");
+            //dao.commitTransaction();
         }
-        List<SoldItem> currentCopy = new ArrayList<>(items);
-        PreviousCart current = new PreviousCart(currentCopy);
-        dao.savePreviousCart(current);
-        log.info("Purchase recorded");
-
-
-        // note the use of transactions. InMemorySalesSystemDAO ignores transactions
-        // but when you start using hibernate in lab5, then it will become relevant.
-        // what is a transaction? https://stackoverflow.com/q/974596
+        //have to change something from here to add elements to PREVIOUSCARTS_SOLDITEMS and see sum column in history tab!!!!!!
         dao.beginTransaction();
         try {
             for (SoldItem item : items) {
@@ -119,5 +113,32 @@ public class ShoppingCart {
             dao.rollbackTransaction();
             throw e;
         }
+
+        dao.beginTransaction();
+
+        List<SoldItem> currentCopy = new ArrayList<>(items);
+        PreviousCart current = new PreviousCart(currentCopy);
+
+        dao.savePreviousCart(current);
+        dao.commitTransaction();
+        log.info("Purchase recorded");
+
+
+
+        // note the use of transactions. InMemorySalesSystemDAO ignores transactions
+        // but when you start using hibernate in lab5, then it will become relevant.
+        // what is a transaction? https://stackoverflow.com/q/974596
+        /**dao.beginTransaction();
+        try {
+            for (SoldItem item : items) {
+                dao.saveSoldItem(item);
+            }
+            dao.commitTransaction();
+            items.clear();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            dao.rollbackTransaction();
+            throw e;
+        }*/
     }
 }

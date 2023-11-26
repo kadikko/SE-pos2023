@@ -17,6 +17,8 @@ import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -155,7 +157,6 @@ public class PurchaseController implements Initializable {
             if (code > dao.findStockItems().size() || code < 1) {
                 log.error("No item with barcode " + code + " exists");
                 new Alert(Alert.AlertType.WARNING, "No item with barcode " + code + " exists. Try again.").show();
-
                 return null;
             } else {//log.debug(dao.findStockItem(code).getName() + " acquired by barcode"); -- displayed too often
                 return dao.findStockItem(code);
@@ -193,6 +194,7 @@ public class PurchaseController implements Initializable {
                 log.error("Incorrect quantity inserted");
             }
             purchaseTableView.refresh();
+            resetProductField();
         }
     }
 

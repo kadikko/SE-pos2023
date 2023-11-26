@@ -12,35 +12,36 @@ public class PreviousCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToMany
-    @JoinTable(
-            name = "PREVIOUSCART_TO_SOLDITEM",
-            joinColumns = @JoinColumn(name = "PREVIOUSCART_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
-    )
-    private List<SoldItem> cart;
+   // @JoinTable(
+   //         name = "PREVIOUSCART_TO_SOLDITEM",
+   //         joinColumns = @JoinColumn(name = "PREVIOUSCART_ID", referencedColumnName = "ID"),
+   //         inverseJoinColumns = @JoinColumn(name = "SOLDITEM_ID", referencedColumnName = "ID")
+   // )
+    private List<SoldItem> soldItems;
     @Column(name = "date")
     private LocalDate date;
     @Column(name = "time")
     private LocalTime time;
 
-
-    public PreviousCart(List<SoldItem> cart) {
-        this.cart = cart;
+    public PreviousCart() {
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
+    }
+    public PreviousCart(List<SoldItem> soldItems) {
+        this.soldItems = soldItems;
         this.date = LocalDate.now();
         this.time = LocalTime.now();
     }
 
-    public PreviousCart() {
 
-    }
 
 
     public List<SoldItem> getCart() {
-        return cart;
+        return soldItems;
     }
 
     public void setCart(List<SoldItem> cart) {
-        this.cart = cart;
+        this.soldItems = cart;
     }
 
     public LocalDate getDate() {
@@ -60,11 +61,11 @@ public class PreviousCart {
     }
 
     public double getTotal() {
-        return cart.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
+        return soldItems.stream().mapToDouble(item -> item.getPrice() * item.getQuantity()).sum();
     }
 
     @Override
     public String toString() {
-        return "Cart"+cart+ ";Date: "+date + "; Time: "+time;
+        return "Cart"+soldItems+ ";Date: "+date + "; Time: "+time;
     }
 }
