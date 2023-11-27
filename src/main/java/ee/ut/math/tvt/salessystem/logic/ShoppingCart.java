@@ -90,35 +90,29 @@ public class ShoppingCart {
     }
 
     public void submitCurrentPurchase() {
-        // TODO decrease quantities of the warehouse stock
+        // TODO decrease quantities of the warehouse stock'
         for (SoldItem item : items) {
-            //dao.beginTransaction();
             StockItem stockItem = dao.findStockItem(item.getStockItem().getId());
             int previousQuantity = stockItem.getQuantity();
             int updatedQuantity = previousQuantity - item.getQuantity();
             stockItem.setQuantity(updatedQuantity);
             log.debug("Warehouse quantity updated");
-            //dao.commitTransaction();
         }
-        //have to change something from here to add elements to PREVIOUSCARTS_SOLDITEMS and see sum column in history tab!!!!!!
-        dao.beginTransaction();
+       dao.beginTransaction();
         try {
-            for (SoldItem item : items) {
-                dao.saveSoldItem(item);
-            }
-            dao.commitTransaction();
-            items.clear();
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            dao.rollbackTransaction();
-            throw e;
-        }
-
-        dao.beginTransaction();
-
-        List<SoldItem> currentCopy = new ArrayList<>(items);
+         for (SoldItem item : items) {
+            dao.saveSoldItem(item);
+         }
+         items.clear();//deletes all elements from list
+         } catch (Exception e) {
+         log.error(e.getMessage());
+         dao.rollbackTransaction();
+         throw e;
+         }
+       // dao.beginTransaction();
+            //have to change something from here to add elements to PREVIOUSCARTS_SOLDITEMS and see sum column in history tab!!!!!!*/
+        List<SoldItem> currentCopy = new ArrayList<>(items);//creates empty array, does not show any errors, but empty
         PreviousCart current = new PreviousCart(currentCopy);
-
         dao.savePreviousCart(current);
         dao.commitTransaction();
         log.info("Purchase recorded");
