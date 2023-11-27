@@ -34,6 +34,14 @@ public class ShoppingCart {
         }
     }
 
+    public boolean validateQuantityNotTooLarge(int quantityToBePurchased, int quantityInWarehouse) {
+        if (quantityToBePurchased > quantityInWarehouse) {
+            throw new SalesSystemException("Quantity exceeds stock in warehouse. ");
+        } else {
+            return true;
+        }
+    }
+
     /**
      * Add new SoldItem to table.
      */
@@ -54,15 +62,14 @@ public class ShoppingCart {
         // TODO verify that warehouse items' quantity remains at least zero or throw an exception
         int quantityInWarehouse = dao.findStockItem(item.getStockItem().getId()).getQuantity();
         try {
-            if (validateQuantityNotNegative(quantityToBePurchased) && quantityToBePurchased <= quantityInWarehouse) {
+            if (validateQuantityNotNegative(quantityToBePurchased) &&
+                    validateQuantityNotTooLarge(quantityToBePurchased, quantityInWarehouse)) {
                 if (alreadyInCart) {
                     item.setQuantity(quantityToBePurchased);
                 } else {
                     items.add(item);
                     log.debug("Added " + item.getName() + "with the quantity of " + item.getQuantity());
                 }
-            } else {
-                throw new SalesSystemException("Quantity exceeds stock in warehouse. ");
             }
         } catch (IllegalArgumentException e) {
             log.error("Quantity cannot be negative.");
