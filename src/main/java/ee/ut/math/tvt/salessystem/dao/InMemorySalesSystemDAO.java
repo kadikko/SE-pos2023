@@ -15,6 +15,8 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     private final List<StockItem> stockItemList;
     private final List<SoldItem> soldItemList;
     private final List<PreviousCart> previousCartList; // all carts before
+    private long nextSaleId = 1;
+
 
 
     public InMemorySalesSystemDAO() {
@@ -70,7 +72,10 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     }
 
     @Override
-    public void saveSoldItem(SoldItem item) {
+    public void saveSoldItem(SoldItem item) {//as we cannot use hibernate for creating an id, this method mocks database by addinf id to SoldItem manually
+        if (item.getId() == null){
+            item.setId(nextSaleId++);
+        }
         soldItemList.add(item);
     }
 

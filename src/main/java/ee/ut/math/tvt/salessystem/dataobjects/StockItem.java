@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Table(name = "STOCKITEM")
 public class StockItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
     private String name;

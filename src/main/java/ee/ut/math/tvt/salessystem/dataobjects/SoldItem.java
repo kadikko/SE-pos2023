@@ -1,6 +1,8 @@
 package ee.ut.math.tvt.salessystem.dataobjects;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Already bought StockItem. SoldItem duplicates name and price for preserving history.
@@ -12,7 +14,7 @@ public class SoldItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "STOCKITEM_ID",nullable = false)
+    @JoinColumn(name = "STOCKITEM_ID",nullable = false, referencedColumnName = "ID")
     private StockItem stockItem;
     @Column(name = "name")
     private String name;
@@ -20,6 +22,8 @@ public class SoldItem {
     private Integer quantity;
     @Column(name = "price")
     private double price;
+    @ManyToMany(mappedBy = "soldItems")
+    private List<PreviousCart> previousCarts;
 
     public SoldItem() {
     }
@@ -27,7 +31,6 @@ public class SoldItem {
     public SoldItem(StockItem stockItem, int quantity) {
 
         this.stockItem = stockItem;
-        this.id = stockItem.getId();
         this.name = stockItem.getName();
         this.price = stockItem.getPrice();
         this.quantity = quantity;
@@ -54,7 +57,7 @@ public class SoldItem {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.price = stockItem.getPrice();
     }
 
     public Integer getQuantity() {
@@ -77,8 +80,17 @@ public class SoldItem {
         this.stockItem = stockItem;
     }
 
+    public List<PreviousCart> getPreviousCarts() {
+        return previousCarts;
+    }
+    public void setPreviousCarts(List<PreviousCart> previousCarts) {
+        this.previousCarts = previousCarts;
+    }
+
     @Override
     public String toString() {
         return String.format("SoldItem{id=%d, name='%s'}", id, name);
     }
+
+
 }

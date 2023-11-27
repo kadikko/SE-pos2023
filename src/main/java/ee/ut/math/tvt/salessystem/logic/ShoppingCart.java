@@ -97,7 +97,7 @@ public class ShoppingCart {
     }
 
     public void submitCurrentPurchase() {
-        // TODO decrease quantities of the warehouse stock
+        // TODO decrease quantities of the warehouse stock'
         for (SoldItem item : items) {
             StockItem stockItem = dao.findStockItem(item.getStockItem().getId());
             int previousQuantity = stockItem.getQuantity();
@@ -105,16 +105,31 @@ public class ShoppingCart {
             stockItem.setQuantity(updatedQuantity);
             log.debug("Warehouse quantity updated");
         }
-        List<SoldItem> currentCopy = new ArrayList<>(items);
+       dao.beginTransaction();
+        try {
+         for (SoldItem item : items) {
+            dao.saveSoldItem(item);
+         }
+         items.clear();//deletes all elements from list
+         } catch (Exception e) {
+         log.error(e.getMessage());
+         dao.rollbackTransaction();
+         throw e;
+         }
+       // dao.beginTransaction();
+            //have to change something from here to add elements to PREVIOUSCARTS_SOLDITEMS and see sum column in history tab!!!!!!*/
+        List<SoldItem> currentCopy = new ArrayList<>(items);//creates empty array, does not show any errors, but empty
         PreviousCart current = new PreviousCart(currentCopy);
         dao.savePreviousCart(current);
+        dao.commitTransaction();
         log.info("Purchase recorded");
+
 
 
         // note the use of transactions. InMemorySalesSystemDAO ignores transactions
         // but when you start using hibernate in lab5, then it will become relevant.
         // what is a transaction? https://stackoverflow.com/q/974596
-        dao.beginTransaction();
+        /**dao.beginTransaction();
         try {
             for (SoldItem item : items) {
                 dao.saveSoldItem(item);
@@ -125,6 +140,6 @@ public class ShoppingCart {
             log.error(e.getMessage());
             dao.rollbackTransaction();
             throw e;
-        }
+        }*/
     }
 }
