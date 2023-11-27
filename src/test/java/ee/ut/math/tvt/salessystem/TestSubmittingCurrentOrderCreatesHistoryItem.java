@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
+
 
 public class TestSubmittingCurrentOrderCreatesHistoryItem {
     private SalesSystemDAO dao;
@@ -39,9 +39,6 @@ public class TestSubmittingCurrentOrderCreatesHistoryItem {
         dao.saveStockItem(stockitem2);
         SoldItem soldItem1 = new SoldItem(stockitem1, 2);
         SoldItem soldItem2 = new SoldItem(stockitem2, 10);
-        /*List<SoldItem> soldItems = new ArrayList<>();
-        soldItems.add(soldItem1);
-        soldItems.add(soldItem2);*/
         shoppingCart.addItem(soldItem1);
         shoppingCart.addItem(soldItem2);
         shoppingCart.submitCurrentPurchase();
@@ -49,9 +46,5 @@ public class TestSubmittingCurrentOrderCreatesHistoryItem {
         List<PreviousCart> previousCartListNew = dao.findPreviousCartList();
         assertEquals(1, previousCartListNew.size()-previousCartList.size());
 
-        /*PreviousCart newCart = previousCartListNew.get(dao.findPreviousCartList().size()-1);
-        for (int i = 0; i < newCart.getCart().size(); i++) {
-            assertEquals(soldItems.get(i), newCart.getCart().get(i));
-        }*/
     }
 }
