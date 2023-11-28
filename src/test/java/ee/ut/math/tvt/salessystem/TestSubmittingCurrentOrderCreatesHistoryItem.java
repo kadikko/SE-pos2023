@@ -30,7 +30,8 @@ public class TestSubmittingCurrentOrderCreatesHistoryItem {
     @Test
     @DisplayName("Should test if submitting a purchase makes a previousCart item in history")
     public void testSubmittingCurrentOrderCreatesHistoryItem() {
-        List<PreviousCart> previousCartList = dao.findPreviousCartList();
+        List<PreviousCart> oldCartList = dao.findPreviousCartList();
+        int oldCartListSize = oldCartList.size();
         int initialStockSize = dao.findStockItems().size();
         long barCodeForNewItem = initialStockSize + 1;
         StockItem stockitem1 = new StockItem(barCodeForNewItem, "Water", "sparkling", 1.20, 20);
@@ -39,12 +40,21 @@ public class TestSubmittingCurrentOrderCreatesHistoryItem {
         dao.saveStockItem(stockitem2);
         SoldItem soldItem1 = new SoldItem(stockitem1, 2);
         SoldItem soldItem2 = new SoldItem(stockitem2, 10);
+        List<SoldItem> soldItems = new ArrayList<>();
+        soldItems.add(soldItem1);
+        soldItems.add(soldItem2);
         shoppingCart.addItem(soldItem1);
         shoppingCart.addItem(soldItem2);
         shoppingCart.submitCurrentPurchase();
 
-        List<PreviousCart> previousCartListNew = dao.findPreviousCartList();
-        assertEquals(1, previousCartListNew.size()-previousCartList.size());
+        List<PreviousCart> newCartList = dao.findPreviousCartList();
+        List<SoldItem> cartNew = newCartList.get(dao.findPreviousCartList().size()-1).getCart();
+
+        assertEquals(1,newCartList.size()-oldCartListSize);
+
+        for (int i = 0; i < soldItems.size(); i++) {
+            assertEquals(soldItems.get(i), cartNew.get(i));
+        }
 
     }
 }
