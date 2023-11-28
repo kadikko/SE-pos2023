@@ -35,6 +35,7 @@ public interface SalesSystemDAO {
 
     List<PreviousCart> findPreviousCartList();
 
+    List<PreviousCart> findLast10Carts();
 
     void saveStockItem(StockItem stockItem);
 

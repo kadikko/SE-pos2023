@@ -81,12 +81,15 @@ public class HistoryController implements Initializable {
     //shows last 10 carts
     public void show10() {
         log.debug("Showing the last 10 carts");
-        List<PreviousCart> sortedCarts = getSortedCarts();
+        /*List<PreviousCart> sortedCarts = getSortedCarts();
         int endIndex = Math.min(sortedCarts.size(), 10);
         List<PreviousCart> last10Carts = sortedCarts.subList(0, endIndex);
 
         listPurchases.setItems(FXCollections.observableList(last10Carts));
-        listPurchases.refresh();
+        listPurchases.refresh();*/
+        List<PreviousCart> last10Carts = dao.findLast10Carts();
+        listPurchases.setItems(FXCollections.observableList(last10Carts));
+
     }
 
     @FXML

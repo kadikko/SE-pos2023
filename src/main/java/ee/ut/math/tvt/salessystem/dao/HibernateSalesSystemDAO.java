@@ -27,6 +27,9 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     public List<StockItem> findStockItems() {
         return em.createQuery("from StockItem ", StockItem.class).getResultList();
     }
+    public List<PreviousCart> findLast10Carts() {
+        return em.createQuery("SELECT s FROM PreviousCart s ORDER BY date, time", PreviousCart.class).setMaxResults(10).getResultList();
+    }
 
     @Override
     public StockItem findStockItem(long id) {

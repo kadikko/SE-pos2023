@@ -4,11 +4,8 @@ import ee.ut.math.tvt.salessystem.dataobjects.PreviousCart;
 import ee.ut.math.tvt.salessystem.dataobjects.SoldItem;
 import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class InMemorySalesSystemDAO implements SalesSystemDAO {
 
@@ -69,6 +66,11 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
     @Override
     public List<PreviousCart>  findPreviousCartList() {
         return previousCartList;
+    }
+
+    @Override
+    public List<PreviousCart> findLast10Carts() {
+        return null;
     }
 
     @Override
