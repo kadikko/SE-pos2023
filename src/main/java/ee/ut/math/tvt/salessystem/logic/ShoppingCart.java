@@ -105,21 +105,25 @@ public class ShoppingCart {
             stockItem.setQuantity(updatedQuantity);
             log.debug("Warehouse quantity updated");
         }
-       dao.beginTransaction();
+        dao.beginTransaction();
+        PreviousCart current = new PreviousCart();
         try {
          for (SoldItem item : items) {
-            dao.saveSoldItem(item);
+             item.setId((long) (dao.findSoldItems().size()+1));
+             dao.saveSoldItem(item);
+             current.addSoldItemToCart(item);
          }
+         log.info(current.getCart());
          items.clear();//deletes all elements from list
          } catch (Exception e) {
          log.error(e.getMessage());
          dao.rollbackTransaction();
          throw e;
          }
-       // dao.beginTransaction();
-            //have to change something from here to add elements to PREVIOUSCARTS_SOLDITEMS and see sum column in history tab!!!!!!*/
-        List<SoldItem> currentCopy = new ArrayList<>(items);//creates empty array, does not show any errors, but empty
-        PreviousCart current = new PreviousCart(currentCopy);
+        // dao.beginTransaction();
+        //have to change something from here to add elements to PREVIOUSCARTS_SOLDITEMS and see sum column in history tab!!!!!!
+        //List<SoldItem> currentCopy = new ArrayList<>(items);//creates empty array, does not show any errors, but empty
+        //PreviousCart current = new PreviousCart(currentCopy);
         dao.savePreviousCart(current);
         dao.commitTransaction();
         log.info("Purchase recorded");

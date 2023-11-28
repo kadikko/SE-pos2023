@@ -28,7 +28,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
             data -->
             <!-- https://docs.oracle.com/javaee/7/tutorial/persistence-
             intro005.htm -->
-            <property name="javax.persistence.schema-generation.database.action" value="none"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>

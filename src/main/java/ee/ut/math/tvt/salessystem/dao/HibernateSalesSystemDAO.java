@@ -6,8 +6,6 @@ import ee.ut.math.tvt.salessystem.dataobjects.StockItem;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.transaction.Transactional;
-import java.math.BigInteger;
 import java.util.List;
 
 public class HibernateSalesSystemDAO implements SalesSystemDAO {
@@ -49,7 +47,10 @@ public class HibernateSalesSystemDAO implements SalesSystemDAO {
     public void saveSoldItem(SoldItem item) {
         em.merge(item);
     }
-
+    @Override
+    public List<SoldItem> findSoldItems() {
+        return em.createQuery("from SoldItem ", SoldItem.class).getResultList();
+    }
     @Override
     public void savePreviousCart(PreviousCart previousCart) {
         em.merge(previousCart);

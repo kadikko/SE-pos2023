@@ -40,6 +40,8 @@ public interface SalesSystemDAO {
 
     void saveSoldItem(SoldItem item);
 
+    List<SoldItem> findSoldItems();
+
     void savePreviousCart(PreviousCart previousCart);
 
 

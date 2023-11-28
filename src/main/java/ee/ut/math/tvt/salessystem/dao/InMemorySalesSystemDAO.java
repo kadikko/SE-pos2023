@@ -49,7 +49,7 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
 //
 //        }
 //        this.previousCartList = previousCartsItems;
-        this.previousCartList = new ArrayList<>(); //COMMET THIS OUT, IF YOU WANT TO USE MADE UP CARTS
+        this.previousCartList = new ArrayList<>(); //COMMENT THIS OUT, IF YOU WANT TO USE MADE UP CARTS
     }
 
     @Override
@@ -77,6 +77,11 @@ public class InMemorySalesSystemDAO implements SalesSystemDAO {
             item.setId(nextSaleId++);
         }
         soldItemList.add(item);
+    }
+
+    @Override
+    public List<SoldItem> findSoldItems() {
+        return soldItemList;
     }
 
     @Override

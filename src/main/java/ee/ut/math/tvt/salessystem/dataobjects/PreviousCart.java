@@ -3,6 +3,7 @@ package ee.ut.math.tvt.salessystem.dataobjects;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,6 +25,7 @@ public class PreviousCart {
     private LocalTime time;
 
     public PreviousCart() {
+        this.soldItems = new ArrayList<>();
         this.date = LocalDate.now();
         this.time = LocalTime.now();
     }
@@ -35,7 +37,9 @@ public class PreviousCart {
 
 
 
-
+    public void addSoldItemToCart(SoldItem soldItem) {
+        soldItems.add(soldItem);
+    }
     public List<SoldItem> getCart() {
         return soldItems;
     }
