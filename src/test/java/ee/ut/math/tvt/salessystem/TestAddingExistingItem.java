@@ -25,7 +25,7 @@ public class TestAddingExistingItem {
         mockDao = mock(InMemorySalesSystemDAO.class);
     }
 
-    @Disabled
+    //@Disabled
     @Test
     @DisplayName("Should show if adding an exiting item increases the stock quantity and if the saveStockItem method of the DAO is not called")
     public void testAddingExistingItem() {

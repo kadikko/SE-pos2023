@@ -90,12 +90,15 @@ public class StockController implements Initializable {
                 stockItem.setQuantity(stockItem.getQuantity() + quantity);
                 dao.commitTransaction();
             } else {
+                dao.rollbackTransaction();
                 throw new IllegalArgumentException("Inserted quantity was negative. ");
             }
         } catch (NumberFormatException e) {
+            dao.rollbackTransaction();
             log.error("Amount - Inserted value was not an integer");
             new Alert(Alert.AlertType.WARNING, "Inserted quantity was not a number. Try again.").show();
         } catch (IllegalArgumentException e) {
+            dao.rollbackTransaction();
             log.error(e.getMessage());
             new Alert(Alert.AlertType.WARNING, e.getMessage() + "Try again.").show();
         }

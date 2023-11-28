@@ -19,7 +19,7 @@ public class TestAddingNewItem {
         dao = new InMemorySalesSystemDAO();
     }
 
-    @Disabled
+    //@Disabled
     @Test
     @DisplayName("Should show if a new item is saved through the DAO")
     public void testAddingNewItem() {
