@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.818s</div>
+<div class="counter">0.768s</div>
 <p>duration</p>
 </div>
 </td>
@@ -81,7 +81,7 @@
 <tr>
 <td class="success">Should show if adding an exiting item increases the stock quantity and if the saveStockItem method of the DAO is not called</td>
 <td class="success">testAddingExistingItem()</td>
-<td class="success">0.005s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -93,7 +93,7 @@
 <tr>
 <td class="success">testAddingItemWithQuantitySumTooLarge()</td>
 <td class="success">testAddingItemWithQuantitySumTooLarge()</td>
-<td class="success">0.002s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -111,13 +111,13 @@
 <tr>
 <td class="success">Checks that canceling an order (with some items) and then submitting a new order (with some different items) only saves the items from the new order (with canceled items are discarded)</td>
 <td class="success">testCancellingOrder()</td>
-<td class="success">0.003s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Checks that after canceling an order the quantities of the related StockItems are not changed</td>
 <td class="success">testCancellingOrderQuantitiesUnchanged()</td>
-<td class="success">0.789s</td>
+<td class="success">0.732s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -129,13 +129,13 @@
 <tr>
 <td class="success">Should test if submitting a purchase makes a previousCart have accurate dates</td>
 <td class="success">testSubmittingCurrentOrderSavesCorrectTime()</td>
-<td class="success">0.005s</td>
+<td class="success">0.007s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Submitting current purchase starts and commits transaction once and in correct order.</td>
 <td class="success">testSubmittingCurrentPurchaseBeginsAndCommitsTransaction()</td>
-<td class="success">0.005s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -149,32 +149,32 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>23:15:01.492 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
-23:15:01.495 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
-23:15:01.507 [Test worker] INFO  ShoppingCart - []
-23:15:01.507 [Test worker] INFO  ShoppingCart - Purchase recorded
-23:15:01.519 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
-23:15:01.520 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
-23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-23:15:01.520 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
-23:15:01.521 [Test worker] INFO  ShoppingCart - Purchase recorded
-23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
-23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
-23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name3with the quantity of 1
-23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name4with the quantity of 2
-23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-23:15:01.524 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='name3'}, SoldItem{id=2, name='name4'}]
-23:15:01.525 [Test worker] INFO  ShoppingCart - Purchase recorded
-23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
-23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
-23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-23:15:01.528 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
-23:15:01.528 [Test worker] INFO  ShoppingCart - Purchase recorded
-23:15:01.530 [Test worker] INFO  ShoppingCart - []
-23:15:01.531 [Test worker] INFO  ShoppingCart - Purchase recorded
+<pre>23:39:42.119 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+23:39:42.121 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+23:39:42.135 [Test worker] INFO  ShoppingCart - []
+23:39:42.136 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:39:42.150 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+23:39:42.150 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+23:39:42.151 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:39:42.151 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:39:42.151 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+23:39:42.151 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:39:42.156 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+23:39:42.156 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+23:39:42.156 [Test worker] DEBUG ShoppingCart - Added name3with the quantity of 1
+23:39:42.157 [Test worker] DEBUG ShoppingCart - Added name4with the quantity of 2
+23:39:42.157 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:39:42.157 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:39:42.157 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='name3'}, SoldItem{id=2, name='name4'}]
+23:39:42.157 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:39:42.160 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+23:39:42.160 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+23:39:42.161 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:39:42.161 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:39:42.161 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+23:39:42.161 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:39:42.163 [Test worker] INFO  ShoppingCart - []
+23:39:42.163 [Test worker] INFO  ShoppingCart - Purchase recorded
 </pre>
 </span>
 </div>
@@ -186,7 +186,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.3.3</a> at Dec 4, 2023, 11:15:01 PM</p>
+<a href="http://www.gradle.org">Gradle 7.3.3</a> at Dec 4, 2023, 11:39:42 PM</p>
 </div>
 </div>
 </body>

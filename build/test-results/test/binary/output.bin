@@ -1,28 +1,28 @@
-R23:15:01.492 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
-R23:15:01.495 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
-323:15:01.507 [Test worker] INFO  ShoppingCart - []
-B23:15:01.507 [Test worker] INFO  ShoppingCart - Purchase recorded
-R23:15:01.519 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
-R23:15:01.520 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
-K23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-K23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-l23:15:01.520 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
-B23:15:01.521 [Test worker] INFO  ShoppingCart - Purchase recorded
-R23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
-R23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
-R23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name3with the quantity of 1
-R23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name4with the quantity of 2
-K23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-K23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-m23:15:01.524 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='name3'}, SoldItem{id=2, name='name4'}]
-B23:15:01.525 [Test worker] INFO  ShoppingCart - Purchase recorded
-	R23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
-	R23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
-	K23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-	K23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
-	l23:15:01.528 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
-	B23:15:01.528 [Test worker] INFO  ShoppingCart - Purchase recorded
+R23:39:42.119 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+R23:39:42.121 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+323:39:42.135 [Test worker] INFO  ShoppingCart - []
+B23:39:42.136 [Test worker] INFO  ShoppingCart - Purchase recorded
+R23:39:42.150 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+R23:39:42.150 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+K23:39:42.151 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+K23:39:42.151 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+l23:39:42.151 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+B23:39:42.151 [Test worker] INFO  ShoppingCart - Purchase recorded
+R23:39:42.156 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+R23:39:42.156 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+R23:39:42.156 [Test worker] DEBUG ShoppingCart - Added name3with the quantity of 1
+R23:39:42.157 [Test worker] DEBUG ShoppingCart - Added name4with the quantity of 2
+K23:39:42.157 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+K23:39:42.157 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+m23:39:42.157 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='name3'}, SoldItem{id=2, name='name4'}]
+B23:39:42.157 [Test worker] INFO  ShoppingCart - Purchase recorded
+	R23:39:42.160 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+	R23:39:42.160 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+	K23:39:42.161 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+	K23:39:42.161 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+	l23:39:42.161 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+	B23:39:42.161 [Test worker] INFO  ShoppingCart - Purchase recorded
 
-323:15:01.530 [Test worker] INFO  ShoppingCart - []
+323:39:42.163 [Test worker] INFO  ShoppingCart - []
 
-B23:15:01.531 [Test worker] INFO  ShoppingCart - Purchase recorded
+B23:39:42.163 [Test worker] INFO  ShoppingCart - Purchase recorded
