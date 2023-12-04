@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Tests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Tests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/ee.ut.math.tvt.salessystem.html">ee.ut.math.tvt.salessystem</a> &gt; Tests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">11</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.818s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">Should show if adding an exiting item increases the stock quantity and if the saveStockItem method of the DAO is not called</td>
+<td class="success">testAddingExistingItem()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testAddingItemWithNegativeQuantity()</td>
+<td class="success">testAddingItemWithNegativeQuantity()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testAddingItemWithQuantitySumTooLarge()</td>
+<td class="success">testAddingItemWithQuantitySumTooLarge()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testAddingItemsWithPositiveQuantity()</td>
+<td class="success">testAddingItemsWithPositiveQuantity()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Should show if a new item is saved through the DAO</td>
+<td class="success">testAddingNewItem()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Checks that canceling an order (with some items) and then submitting a new order (with some different items) only saves the items from the new order (with canceled items are discarded)</td>
+<td class="success">testCancellingOrder()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Checks that after canceling an order the quantities of the related StockItems are not changed</td>
+<td class="success">testCancellingOrderQuantitiesUnchanged()</td>
+<td class="success">0.789s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Should test if submitting a purchase makes a previousCart item in history</td>
+<td class="success">testSubmittingCurrentOrderCreatesHistoryItem()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Should test if submitting a purchase makes a previousCart have accurate dates</td>
+<td class="success">testSubmittingCurrentOrderSavesCorrectTime()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Submitting current purchase starts and commits transaction once and in correct order.</td>
+<td class="success">testSubmittingCurrentPurchaseBeginsAndCommitsTransaction()</td>
+<td class="success">0.005s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">Should detect if submitting the purchase decreases StockItem quantity. Testing submitCurrentPurchase() method in class ShoppingCart.</td>
+<td class="success">testSubmittingCurrentPurchaseDecreasesStockItemQuantity()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>23:15:01.492 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+23:15:01.495 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+23:15:01.507 [Test worker] INFO  ShoppingCart - []
+23:15:01.507 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.519 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+23:15:01.520 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.520 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+23:15:01.521 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name3with the quantity of 1
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name4with the quantity of 2
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.524 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='name3'}, SoldItem{id=2, name='name4'}]
+23:15:01.525 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.528 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+23:15:01.528 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.530 [Test worker] INFO  ShoppingCart - []
+23:15:01.531 [Test worker] INFO  ShoppingCart - Purchase recorded
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.3.3</a> at Dec 4, 2023, 11:15:01 PM</p>
+</div>
+</div>
+</body>
+</html>

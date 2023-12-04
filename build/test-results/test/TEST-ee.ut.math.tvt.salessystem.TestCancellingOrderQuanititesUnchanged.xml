@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ee.ut.math.tvt.salessystem.TestCancellingOrderQuanititesUnchanged" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-11-28T03:04:33" hostname="Bestseller.lan" time="0.671">
-  <properties/>
-  <testcase name="Checks that after canceling an order the quantities of the related StockItems are not changed" classname="ee.ut.math.tvt.salessystem.TestCancellingOrderQuanititesUnchanged" time="0.671"/>
-  <system-out><![CDATA[05:04:34.269 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
-05:04:34.271 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

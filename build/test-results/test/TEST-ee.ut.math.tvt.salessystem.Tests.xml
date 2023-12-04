@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ee.ut.math.tvt.salessystem.Tests" tests="11" skipped="0" failures="0" errors="0" timestamp="2023-12-04T21:15:00" hostname="Bestseller.lan" time="0.826">
+  <properties/>
+  <testcase name="Checks that after canceling an order the quantities of the related StockItems are not changed" classname="ee.ut.math.tvt.salessystem.Tests" time="0.789"/>
+  <testcase name="Should test if submitting a purchase makes a previousCart have accurate dates" classname="ee.ut.math.tvt.salessystem.Tests" time="0.005"/>
+  <testcase name="Should show if adding an exiting item increases the stock quantity and if the saveStockItem method of the DAO is not called" classname="ee.ut.math.tvt.salessystem.Tests" time="0.005"/>
+  <testcase name="testAddingItemsWithPositiveQuantity()" classname="ee.ut.math.tvt.salessystem.Tests" time="0.001"/>
+  <testcase name="testAddingItemWithQuantitySumTooLarge()" classname="ee.ut.math.tvt.salessystem.Tests" time="0.002"/>
+  <testcase name="Should test if submitting a purchase makes a previousCart item in history" classname="ee.ut.math.tvt.salessystem.Tests" time="0.003"/>
+  <testcase name="Checks that canceling an order (with some items) and then submitting a new order (with some different items) only saves the items from the new order (with canceled items are discarded)" classname="ee.ut.math.tvt.salessystem.Tests" time="0.003"/>
+  <testcase name="Should detect if submitting the purchase decreases StockItem quantity. Testing submitCurrentPurchase() method in class ShoppingCart." classname="ee.ut.math.tvt.salessystem.Tests" time="0.002"/>
+  <testcase name="Submitting current purchase starts and commits transaction once and in correct order." classname="ee.ut.math.tvt.salessystem.Tests" time="0.005"/>
+  <testcase name="testAddingItemWithNegativeQuantity()" classname="ee.ut.math.tvt.salessystem.Tests" time="0.002"/>
+  <testcase name="Should show if a new item is saved through the DAO" classname="ee.ut.math.tvt.salessystem.Tests" time="0.001"/>
+  <system-out><![CDATA[23:15:01.492 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+23:15:01.495 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+23:15:01.507 [Test worker] INFO  ShoppingCart - []
+23:15:01.507 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.519 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+23:15:01.520 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.520 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.520 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+23:15:01.521 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name1with the quantity of 2
+23:15:01.523 [Test worker] DEBUG ShoppingCart - Added name2with the quantity of 3
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name3with the quantity of 1
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Added name4with the quantity of 2
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.524 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.524 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='name3'}, SoldItem{id=2, name='name4'}]
+23:15:01.525 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Waterwith the quantity of 2
+23:15:01.527 [Test worker] DEBUG ShoppingCart - Added Milkwith the quantity of 10
+23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.528 [Test worker] DEBUG ShoppingCart - Warehouse quantity updated
+23:15:01.528 [Test worker] INFO  ShoppingCart - [SoldItem{id=1, name='Water'}, SoldItem{id=2, name='Milk'}]
+23:15:01.528 [Test worker] INFO  ShoppingCart - Purchase recorded
+23:15:01.530 [Test worker] INFO  ShoppingCart - []
+23:15:01.531 [Test worker] INFO  ShoppingCart - Purchase recorded
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
