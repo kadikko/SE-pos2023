@@ -158,7 +158,9 @@ public class ConsoleUI {
                 }
                 double price = Double.parseDouble(cmd[3]);
                 log.info("Adding new item to warehouse");
+                dao.beginTransaction();
                 dao.saveStockItem(new StockItem(idx, name.toString(), "", price, amount));
+                dao.commitTransaction();
             } catch (SalesSystemException | NoSuchElementException | NumberFormatException e) {
                 log.error(e.getMessage());
             }
@@ -184,7 +186,8 @@ public class ConsoleUI {
             int counter = 0;
             for (PreviousCart asi : history) {
                 if (counter < 10) {
-                    System.out.println(asi.getDate() + " " + asi.getTime() + ": " + asi.getCart());
+                    List<SoldItem> sisu = asi.getCart();
+                    System.out.println(asi.getDate() + " " + asi.getTime() + ": " + sisu);
                     counter++;
                 } else break;
             }
