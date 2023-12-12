@@ -27,6 +27,6 @@ https://bitbucket.org/lg100/lg10-lg10/commits/tag/homework-5
 Task 3: https://bitbucket.org/lg100/lg10-lg10/wiki/Homework6
 
 ## Homework 7:
-<Links to the solution>
+https://bitbucket.org/lg100/lg10-lg10/wiki/Homework7
 
 We encourage you to use [markdown syntax](https://confluence.atlassian.com/bitbucketserver/markdown-syntax-guide-776639995.html)
